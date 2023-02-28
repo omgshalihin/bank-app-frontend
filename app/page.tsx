@@ -1,11 +1,19 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { getServerSession } from "next-auth";
+import { getServerSession, Session } from "next-auth";
 import { notFound } from "next/navigation";
 import React from "react";
 
-async function getData(session) {
+interface User {
+  id: string;
+  userName: string;
+  userEmail: string;
+  userAccountName: string;
+  userAccountBalance: number;
+}
+
+async function getData(session: Session): Promise<User> {
   const res = await fetch(
-    `http://localhost:8080/api/users/account/${session.user.email}`
+    `http://localhost:8080/api/users/account/${session?.user?.email}`
     // `http://localhost:8080/api/users/account/test`
   );
 
@@ -34,7 +42,14 @@ const Home = async () => {
   const data = await getData(session);
   return (
     <>
-      <h1 className="text-center">Hi, {data.id}</h1>
+      <h1 className="text-center">My Dashboard</h1>
+      <div className="flex flex-col">
+        <span>{data.id}</span>
+        <span>{data.userName}</span>
+        <span>{data.userEmail}</span>
+        <span>{data.userAccountName}</span>
+        <span>${data.userAccountBalance}</span>
+      </div>
     </>
   );
 };
