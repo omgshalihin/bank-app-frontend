@@ -2,7 +2,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession, Session } from "next-auth";
 import { notFound } from "next/navigation";
 import React from "react";
-import UserPrompt from "./components/UserPrompt";
+import UserProfile from "../components/UserProfile";
 
 interface User {
   id: string;
@@ -31,21 +31,26 @@ async function getData(session: Session): Promise<User> {
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
-
   if (!session) {
     return (
       <>
-        <h1 className="text-center">
-          Hi, welcome to your personal banking app!
-        </h1>
+        <h1 className="text-center">Sign in to view your account</h1>
       </>
     );
   }
-
+  const data = await getData(session);
   return (
-    <main className="">
-      <UserPrompt />
-    </main>
+    <>
+      <h1 className="text-center">My Dashboard</h1>
+      <div className="flex flex-col">
+        <span>{data.id}</span>
+        <span>{data.userName}</span>
+        <span>{data.userEmail}</span>
+        <span>{data.userAccountName}</span>
+        <span>${data.userAccountBalance}</span>
+      </div>
+      <UserProfile />
+    </>
   );
 };
 
