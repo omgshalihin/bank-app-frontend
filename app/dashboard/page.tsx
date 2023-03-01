@@ -8,8 +8,7 @@ interface User {
   id: string;
   userName: string;
   userEmail: string;
-  userAccountName: string;
-  userAccountBalance: number;
+  userAccount: any[];
 }
 
 async function getData(session: Session): Promise<User> {
@@ -34,7 +33,7 @@ const Home = async () => {
   if (!session) {
     return (
       <>
-        <h1 className="text-center">Sign in to view your account</h1>
+        <h1 className="text-center">Sign in to view your dashboard</h1>
       </>
     );
   }

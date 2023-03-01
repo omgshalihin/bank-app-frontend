@@ -35,7 +35,7 @@ const Register = () => {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
-    router.push("/account");
+    router.push("/dashboard");
   };
 
   return (

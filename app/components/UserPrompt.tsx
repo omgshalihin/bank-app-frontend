@@ -11,16 +11,35 @@ const UserPrompt = () => {
           What would you like to do?
         </h5>
         <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
-          Connect with one of our available wallet providers or create a new
-          one.
+          Each of these services bring you to its respective pages.
         </p>
         <ul className="my-4 space-y-3">
+          <li>
+            <Link
+              href={"/dashboard"}
+              className="group flex items-center rounded-lg bg-gray-50 p-3 text-base font-bold text-gray-900 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500"
+            >
+              <span className="ml-3 flex-1 whitespace-nowrap">
+                My Dashboard
+              </span>
+            </Link>
+          </li>
           <li>
             <Link
               href={"/account"}
               className="group flex items-center rounded-lg bg-gray-50 p-3 text-base font-bold text-gray-900 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500"
             >
-              <span className="ml-3 flex-1 whitespace-nowrap">My Account</span>
+              <span className="ml-3 flex-1 whitespace-nowrap">
+                Create New Account
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href={"/deposit"}
+              className="group flex items-center rounded-lg bg-gray-50 p-3 text-base font-bold text-gray-900 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500"
+            >
+              <span className="ml-3 flex-1 whitespace-nowrap">Deposit</span>
             </Link>
           </li>
           <li>

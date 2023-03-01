@@ -19,8 +19,8 @@ const UserDropdownHeader = ({ name, email }: User) => {
           <span className="block text-sm">{name}</span>
           <span className="block truncate text-sm font-medium">{email}</span>
         </Dropdown.Header>
-        <Dropdown.Item onClick={() => router.push("/account")}>
-          My Account
+        <Dropdown.Item onClick={() => router.push("/dashboard")}>
+          My Dashboard
         </Dropdown.Item>
         <Dropdown.Item>Pay & Transfer</Dropdown.Item>
         <Dropdown.Item>Invest</Dropdown.Item>
