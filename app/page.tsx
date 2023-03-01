@@ -44,7 +44,7 @@ const Home = async () => {
 
   return (
     <main className="">
-      <UserPrompt />
+      <UserPrompt session={session} />
     </main>
   );
 };
