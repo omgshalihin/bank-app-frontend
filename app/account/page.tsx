@@ -22,25 +22,20 @@ async function getData(session: Session): Promise<User> {
   return res.json();
 }
 
-async function getNewData(id) {
-  const res = await fetch(`http://localhost:8080/api/users/${id}`);
-  if (!res.ok) {
-    notFound();
-  }
-
-  return res.json();
-}
-
 const page = async () => {
   const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return (
+      <>
+        <h1 className="text-center">Sign in to view your account</h1>
+      </>
+    );
+  }
   const data = await getData(session);
-  const newData = await getNewData(data.id);
 
   return (
     <div>
-      <h1>Account route</h1>
-      <p>{session?.user?.email}</p>
-      <p>{data.id}</p>
       <CreateAccount data={data} />
     </div>
   );

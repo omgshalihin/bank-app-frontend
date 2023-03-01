@@ -3,7 +3,7 @@ import { Card } from "flowbite-react";
 import Link from "next/link";
 import React from "react";
 
-const UserPrompt = ({ session }) => {
+const UserPrompt = () => {
   return (
     <div className="mx-auto">
       <Card>

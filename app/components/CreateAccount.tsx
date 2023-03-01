@@ -4,11 +4,20 @@ import { Button, Label, TextInput } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const CreateAccount = ({ data }) => {
+interface User {
+  data: {
+    id: string;
+    userName: string;
+    userEmail: string;
+    userAccount: any[];
+  };
+}
+
+const CreateAccount = ({ data }: User) => {
   const router = useRouter();
 
   const [name, setName] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState<number>(0);
 
   const registerName = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -19,7 +28,7 @@ const CreateAccount = ({ data }) => {
   const registerAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
-    setAmount(value);
+    setAmount(parseFloat(value));
   };
 
   const handleCreation = () => {
@@ -40,7 +49,6 @@ const CreateAccount = ({ data }) => {
 
   return (
     <div>
-      <h1>create account</h1>
       <form className="flex flex-col gap-4">
         <div>
           <div className="mb-2 block">
