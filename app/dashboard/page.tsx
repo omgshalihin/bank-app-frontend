@@ -12,14 +12,17 @@ interface User {
 }
 
 async function getData(session: Session): Promise<User> {
+  console.log("enter");
   const res = await fetch(
     `http://localhost:8080/api/users/account/${session?.user?.email}`,
-    { next: { revalidate: 2 } }
+    { cache: "no-store" }
   );
   if (!res.ok) {
+    console.log("res not ok");
     notFound();
   }
 
+  console.log("res ok");
   return res.json();
 }
 

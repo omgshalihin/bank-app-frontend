@@ -9,15 +9,13 @@ const Success = () => {
   useEffect(() => {
     setTimeout(() => {
       router.push("/dashboard");
-    }, 2000);
+    }, 3000);
   }, []);
 
   return (
     <div>
-      <p>
-        You have successfully created an account. Now you will be directed to
-        dashboard.
-      </p>
+      <p>You have successfully created an account.</p>
+      <p>Now you will be directed to dashboard.</p>
     </div>
   );
 };

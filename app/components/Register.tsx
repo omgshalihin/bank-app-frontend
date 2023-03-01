@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, Label, TextInput } from "flowbite-react";
-import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -37,7 +36,6 @@ const Register = ({ email }: Email) => {
 
   return (
     <div>
-      <h1>{email}</h1>
       <form className="flex flex-col gap-4">
         <div>
           <div className="mb-2 block">
