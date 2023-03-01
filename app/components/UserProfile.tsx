@@ -3,36 +3,45 @@
 import { Card, Dropdown } from "flowbite-react";
 import React from "react";
 
-const UserProfile = () => {
+interface User {
+  data: {
+    id: string;
+    userName: string;
+    userEmail: string;
+    userAccountName: string;
+    userAccountBalance: number;
+  };
+  image: string;
+}
+
+const UserProfile = ({ data, image }: User) => {
   return (
-    <div className="max-w-sm">
+    <div className="mx-auto">
       <Card>
         <div className="flex justify-end px-4 pt-4"></div>
         <div className="flex flex-col items-center pb-10">
           <img
             className="mb-3 h-24 w-24 rounded-full shadow-lg"
-            src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-            alt="Bonnie image"
+            src={image}
+            alt="profile image"
           />
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            Bonnie Green
+            {data.userName}
           </h5>
           <span className="text-sm text-gray-500 dark:text-gray-400">
-            Visual Designer
+            {data.userEmail}
           </span>
-          <div className="mt-4 flex space-x-3 lg:mt-6">
-            <a
-              href="#"
-              className="inline-flex items-center rounded-lg bg-blue-700 py-2 px-4 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Add friend
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-            >
-              Message
-            </a>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            {data.id}
+          </span>
+          <h5 className="pt-10 mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
+            Account Balance
+          </h5>
+          <div className="flex items-baseline text-gray-900 dark:text-white">
+            <span className="text-3xl font-semibold">$</span>
+            <span className="text-5xl font-extrabold tracking-tight">
+              {data.userAccountBalance}
+            </span>
           </div>
         </div>
       </Card>

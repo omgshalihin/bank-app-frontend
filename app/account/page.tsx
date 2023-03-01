@@ -41,15 +41,7 @@ const Home = async () => {
   const data = await getData(session);
   return (
     <>
-      <h1 className="text-center">My Dashboard</h1>
-      <div className="flex flex-col">
-        <span>{data.id}</span>
-        <span>{data.userName}</span>
-        <span>{data.userEmail}</span>
-        <span>{data.userAccountName}</span>
-        <span>${data.userAccountBalance}</span>
-      </div>
-      <UserProfile />
+      <UserProfile data={data} image={session?.user?.image || ""} />
     </>
   );
 };
