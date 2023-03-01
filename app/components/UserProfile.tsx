@@ -1,15 +1,12 @@
 "use client";
 
 import { Card, Dropdown } from "flowbite-react";
-import React, { useEffect, useState } from "react";
+import React, { cache, use, useEffect, useState } from "react";
+import useSWR from "swr";
+import Spinners from "./Spinners";
 
 interface User {
-  data: {
-    id: string;
-    userName: string;
-    userEmail: string;
-    userAccount: any[];
-  };
+  id: string;
   image: string;
 }
 
@@ -18,7 +15,23 @@ type Account = {
   accountBalance: number;
 };
 
-const UserProfile = ({ data, image }: User) => {
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
+
+const UserProfile = ({ id, image }: User) => {
+  const { data, error, isLoading } = useSWR(
+    `http://localhost:8080/api/users/${id}`,
+    fetcher
+  );
+
+  if (error) return <div>Failed to load</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Spinners />
+      </div>
+    );
+
   return (
     <div className="mx-auto">
       <Card>
@@ -58,7 +71,8 @@ const UserProfile = ({ data, image }: User) => {
             <span id="count" className="text-5xl font-extrabold tracking-tight">
               {data.userAccount
                 .map((account: Account) => account.accountBalance)
-                .reduce((prev, curr) => prev + curr, 0)}
+                .reduce((prev: number, curr: number) => prev + curr, 0)
+                .toFixed(2)}
             </span>
           </div>
         </div>

@@ -36,7 +36,7 @@ const Home = async () => {
   const data = await getData(session);
   return (
     <>
-      <UserProfile data={data} image={session?.user?.image || ""} />
+      <UserProfile id={data.id} image={session?.user?.image || ""} />
     </>
   );
 };
