@@ -13,7 +13,8 @@ interface User {
 
 async function getData(session: Session): Promise<User> {
   const res = await fetch(
-    `http://localhost:8080/api/users/account/${session?.user?.email}`
+    `http://localhost:8080/api/users/account/${session?.user?.email}`,
+    { next: { revalidate: 2 } }
   );
   if (!res.ok) {
     notFound();
@@ -24,6 +25,7 @@ async function getData(session: Session): Promise<User> {
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
+
   if (!session) {
     return (
       <>

@@ -55,7 +55,7 @@ const UserProfile = ({ data, image }: User) => {
           </h5>
           <div className="flex items-baseline text-gray-900 dark:text-white">
             <span className="text-3xl font-semibold">$</span>
-            <span className="text-5xl font-extrabold tracking-tight">
+            <span id="count" className="text-5xl font-extrabold tracking-tight">
               {data.userAccount
                 .map((account: Account) => account.accountBalance)
                 .reduce((prev, curr) => prev + curr, 0)}

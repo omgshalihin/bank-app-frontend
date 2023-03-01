@@ -1,4 +1,5 @@
 "use client";
+
 import { Card } from "flowbite-react";
 import Link from "next/link";
 import React from "react";
