@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, Dropdown } from "flowbite-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface User {
   data: {
