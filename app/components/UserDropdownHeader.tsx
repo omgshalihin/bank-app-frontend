@@ -26,7 +26,7 @@ const UserDropdownHeader = ({ name, email }: User) => {
         <Dropdown.Header>
           <span className="block text-sm">{name}</span>
           <span className="block truncate text-sm font-medium">{email}</span>
-          <span className="block truncate text-sm font-medium">{data?.id}</span>
+          {/* <span className="block truncate text-sm font-medium">{data?.id}</span> */}
         </Dropdown.Header>
         <Dropdown.Item onClick={() => router.push(`/dashboard/${data?.id}`)}>
           My Dashboard
