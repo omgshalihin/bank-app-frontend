@@ -17,6 +17,8 @@ async function getData(session: Session): Promise<User> {
 
 const page = async () => {
   const session = await getServerSession(authOptions);
+  console.log("check here");
+  console.log(session);
 
   if (!session) {
     return (

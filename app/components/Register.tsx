@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, Label, TextInput } from "flowbite-react";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 type User = {
@@ -10,63 +9,96 @@ type User = {
 };
 
 const Register = ({ email, image }: User) => {
-  const router = useRouter();
-  const [name, setName] = useState("");
+  const [formData, setFormData] = useState({
+    userName: "",
+    userEmail: email,
+    userImage: image,
+  });
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [formSuccessMessage, setFormSuccessMessage] = useState("");
 
-  const registerName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const value = e.target.value;
-    setName(value);
+  const handleInput = (e) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [fieldName]: fieldValue,
+    }));
   };
 
-  const handleRegistration = () => {
-    const data = {
-      userName: name,
-      userEmail: email,
-      userImage: image,
-    };
-    fetch(`http://localhost:8080/api/users`, {
+  console.log(formData);
+
+  const submitForm = () => {
+    const url = "http://localhost:8080/api/users";
+    fetch(url, {
       method: "POST",
       mode: "cors",
-      body: JSON.stringify(data),
+      body: JSON.stringify(formData),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    });
-    router.push("/register/success");
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setFormData({
+          userName: "",
+          userEmail: "",
+          userImage: "",
+        });
+        setFormSuccess(true);
+        setFormSuccessMessage(data.submission_text);
+      });
   };
 
   return (
-    <form className="flex flex-col gap-4">
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="name" value="Your username" />
+    <div>
+      <form
+        className="flex flex-col gap-4"
+        method="POST"
+        action="/register/success"
+        onSubmit={submitForm}
+      >
+        <div>
+          <div className="mb-2 block">
+            <Label value="Your username" />
+          </div>
+          <TextInput
+            type="text"
+            name="userName"
+            onChange={handleInput}
+            value={formData.userName}
+            required={true}
+            shadow={true}
+          />
         </div>
-        <TextInput
-          onChange={(e) => registerName(e)}
-          id="name"
-          type="text"
-          required={true}
-          shadow={true}
-        />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="disabledEmail" value="Your email" />
+        <div>
+          <div className="mb-2 block">
+            <Label value="Your email" />
+          </div>
+          <TextInput
+            type="text"
+            name="userEmail"
+            value={email}
+            disabled={true}
+            readOnly={true}
+          />
         </div>
-        <TextInput
-          id="disabledEmail"
-          type="text"
-          value={email}
-          placeholder="name@domain.com"
-          disabled={true}
-          readOnly={true}
-        />
-      </div>
-      <Button type="button" onClick={() => handleRegistration()}>
-        Become a member
-      </Button>
-    </form>
+        <div>
+          <div className="mb-2 block">
+            <Label value="Your image URL" />
+          </div>
+          <TextInput
+            type="text"
+            name="userImage"
+            value={image}
+            disabled={true}
+            readOnly={true}
+          />
+        </div>
+        <Button type="submit">Become a member</Button>
+      </form>
+    </div>
   );
 };
 
