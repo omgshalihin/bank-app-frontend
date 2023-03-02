@@ -1,10 +1,34 @@
 "use client";
 
 import { Card } from "flowbite-react";
+import { Session } from "next-auth";
 import Link from "next/link";
 import React from "react";
+import useSWR from "swr";
+import Register from "./Register";
+import Spinners from "./Spinners";
 
-const UserPrompt = () => {
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
+
+const UserPrompt = ({ email, image }: any) => {
+  const { data, error, isLoading } = useSWR(
+    `http://localhost:8080/api/users/account/${email}`,
+    fetcher
+  );
+  if (error)
+    return (
+      <div>
+        <Register email={email} image={image} />
+      </div>
+    );
+  if (isLoading)
+    return (
+      <div>
+        <Spinners />
+      </div>
+    );
+
   return (
     <div className="mx-auto">
       <Card>
@@ -17,7 +41,7 @@ const UserPrompt = () => {
         <ul className="my-4 space-y-3">
           <li>
             <Link
-              href={"/dashboard"}
+              href={!data.id ? "/dashboard" : `/dashboard/${data.id}`}
               className="group flex items-center rounded-lg bg-gray-50 p-3 text-base font-bold text-gray-900 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500"
             >
               <span className="ml-3 flex-1 whitespace-nowrap">

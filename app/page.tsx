@@ -17,7 +17,7 @@ const Home = async () => {
 
   return (
     <main className="">
-      <UserPrompt />
+      <UserPrompt email={session?.user?.email} image={session?.user?.image} />
     </main>
   );
 };

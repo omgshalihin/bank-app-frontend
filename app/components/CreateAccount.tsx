@@ -1,19 +1,39 @@
 "use client";
 
 import { Button, Label, TextInput } from "flowbite-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
 import React, { useState } from "react";
+import Spinners from "./Spinners";
 
 interface User {
-  data: {
-    id: string;
-    userName: string;
-    userEmail: string;
-    userAccount: any[];
-  };
+  id: string;
 }
 
-const CreateAccount = ({ data }: User) => {
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
+
+const CreateAccount = ({ id }: User) => {
+  const { data, error, isLoading } = useSWR(
+    `http://localhost:8080/api/users/${id}`,
+    fetcher
+  );
+
+  if (error)
+    return (
+      <div>
+        <p>It seems that you are not a member</p>
+        <Link href={"/register"}>Click</Link>
+      </div>
+    );
+  if (isLoading)
+    return (
+      <div>
+        <Spinners />
+      </div>
+    );
+
   const router = useRouter();
 
   const [name, setName] = useState("");
@@ -36,7 +56,7 @@ const CreateAccount = ({ data }: User) => {
       accountName: name,
       accountBalance: amount,
     };
-    fetch(`http://localhost:8080/api/users/${data.id}`, {
+    fetch(`http://localhost:8080/api/users/${id}`, {
       method: "PUT",
       mode: "cors",
       body: JSON.stringify(newAccountData),

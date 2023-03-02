@@ -4,11 +4,12 @@ import { Button, Label, TextInput } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-type Email = {
+type User = {
   email: string;
+  image: string;
 };
 
-const Register = ({ email }: Email) => {
+const Register = ({ email, image }: User) => {
   const router = useRouter();
   const [name, setName] = useState("");
 
@@ -22,6 +23,7 @@ const Register = ({ email }: Email) => {
     const data = {
       userName: name,
       userEmail: email,
+      userImage: image,
     };
     fetch(`http://localhost:8080/api/users`, {
       method: "POST",
@@ -35,38 +37,36 @@ const Register = ({ email }: Email) => {
   };
 
   return (
-    <div>
-      <form className="flex flex-col gap-4">
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="name" value="Your username" />
-          </div>
-          <TextInput
-            onChange={(e) => registerName(e)}
-            id="name"
-            type="text"
-            required={true}
-            shadow={true}
-          />
+    <form className="flex flex-col gap-4">
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="name" value="Your username" />
         </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="disabledEmail" value="Your email" />
-          </div>
-          <TextInput
-            id="disabledEmail"
-            type="text"
-            value={email}
-            placeholder="name@domain.com"
-            disabled={true}
-            readOnly={true}
-          />
+        <TextInput
+          onChange={(e) => registerName(e)}
+          id="name"
+          type="text"
+          required={true}
+          shadow={true}
+        />
+      </div>
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="disabledEmail" value="Your email" />
         </div>
-        <Button type="button" onClick={() => handleRegistration()}>
-          Register new account
-        </Button>
-      </form>
-    </div>
+        <TextInput
+          id="disabledEmail"
+          type="text"
+          value={email}
+          placeholder="name@domain.com"
+          disabled={true}
+          readOnly={true}
+        />
+      </div>
+      <Button type="button" onClick={() => handleRegistration()}>
+        Become a member
+      </Button>
+    </form>
   );
 };
 

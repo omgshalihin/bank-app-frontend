@@ -36,7 +36,7 @@ const page = async () => {
 
   return (
     <div>
-      <CreateAccount data={data} />
+      <CreateAccount id={data.id} />
     </div>
   );
 };

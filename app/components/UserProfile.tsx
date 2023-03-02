@@ -1,6 +1,7 @@
 "use client";
 
 import { Card, Dropdown } from "flowbite-react";
+import Link from "next/link";
 import React, { cache, use, useEffect, useState } from "react";
 import useSWR from "swr";
 import Spinners from "./Spinners";
@@ -24,7 +25,13 @@ const UserProfile = ({ id, image }: User) => {
     fetcher
   );
 
-  if (error) return <div>Failed to load</div>;
+  if (error)
+    return (
+      <div>
+        <p>Failed to load</p>
+        <Link href={"/register"}>Click</Link>
+      </div>
+    );
   if (isLoading)
     return (
       <div>
