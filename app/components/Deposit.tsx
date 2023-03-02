@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Checkbox, Table } from "flowbite-react";
+import { Button, Checkbox, Label, Table, TextInput } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
@@ -70,11 +70,17 @@ const Deposit = ({ data }: any) => {
 
   return (
     <div>
-      <div>
-        <label htmlFor="">
-          How much do you wish to deposit?
-          <input onChange={(e) => depositAmount(e)} type="number" min={0} />
-        </label>
+      <div className="flex flex-col items-center align-middle">
+        <div className="mb-2 block text-center">
+          <Label value="How much do you wish to deposit?" />
+        </div>
+        <TextInput
+          sizing="sm"
+          onChange={(e) => depositAmount(e)}
+          type="number"
+          min={0}
+          className="mb-5"
+        />
       </div>
 
       <Table>
