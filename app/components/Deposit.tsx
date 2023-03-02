@@ -5,8 +5,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
-const Deposit = ({ data }) => {
-  const [userData, setUserData] = useState(data);
+interface User {
+  id: string;
+  userName: string;
+  userEmail: string;
+  userImage: string;
+  userAccount: any[];
+}
+
+interface Account {
+  accountId: string;
+  accountName: string;
+  accountBalance: number;
+}
+
+const Deposit = ({ data }: any) => {
+  const [userData, setUserData] = useState<User>(data);
   const [amount, setAmount] = useState<number>(0);
   const [checkBoxStatus, setCheckBoxStatus] = useState({
     status: false,
@@ -15,15 +29,13 @@ const Deposit = ({ data }) => {
   const pathName = usePathname();
   const userId = pathName?.split("/")[2];
 
-  const depositAmount = (e) => {
-    console.log(e);
+  const depositAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setAmount(parseFloat(value));
   };
 
-  const handleCheckBox = (e, name) => {
+  const handleCheckBox = (e: any, name: string) => {
     const isChecked = e.target.checked;
-    console.log(name);
 
     setCheckBoxStatus({
       status: isChecked,
@@ -31,9 +43,7 @@ const Deposit = ({ data }) => {
     });
   };
 
-  console.log(checkBoxStatus);
-
-  const handleConfirm = async (account) => {
+  const handleConfirm = async (account: Account) => {
     const accountId = await account.accountId;
     const balance = await account.accountBalance;
     const depositAmount = await amount;
@@ -42,7 +52,7 @@ const Deposit = ({ data }) => {
     patchData(accountId, projectedBalance);
   };
 
-  const patchData = (accountId, projectedBalance) => {
+  const patchData = (accountId: string, projectedBalance: number) => {
     const dataToPatch = {
       accountBalance: `${projectedBalance}`,
     };
