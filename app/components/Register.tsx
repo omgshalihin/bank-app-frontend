@@ -27,8 +27,6 @@ const Register = ({ email, image }: User) => {
     }));
   };
 
-  console.log(formData);
-
   const submitForm = () => {
     const url = "http://localhost:8080/api/users";
     fetch(url, {

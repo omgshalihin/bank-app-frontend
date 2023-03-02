@@ -1,7 +1,6 @@
 "use client";
 
 import { Card } from "flowbite-react";
-import { Session } from "next-auth";
 import Link from "next/link";
 import React from "react";
 import useSWR from "swr";
@@ -52,10 +51,6 @@ const UserPrompt = ({ email, image }: any) => {
           <li>
             <Link
               href={`/account`}
-              // href={{
-              //   pathname: "/account",
-              //   query: session.user.email, // the data
-              // }}
               className="group flex items-center rounded-lg bg-gray-50 p-3 text-base font-bold text-gray-900 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500"
             >
               <span className="ml-3 flex-1 whitespace-nowrap">

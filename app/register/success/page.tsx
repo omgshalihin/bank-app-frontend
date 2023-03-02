@@ -22,9 +22,9 @@ const page = async () => {
 
   if (!session) {
     return (
-      <>
-        <h1 className="text-center">Sign in to view your account</h1>
-      </>
+      <div>
+        <span className="text-center">Sign in to view your account</span>
+      </div>
     );
   }
   const data = await getData(session);

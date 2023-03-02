@@ -3,7 +3,7 @@
 import Spinners from "@/app/components/Spinners";
 import UserProfile from "@/app/components/UserProfile";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React from "react";
 import useSWR from "swr";
 

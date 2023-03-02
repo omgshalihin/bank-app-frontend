@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+
 type User = {
   id: string;
 };

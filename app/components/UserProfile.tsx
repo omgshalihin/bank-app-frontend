@@ -1,8 +1,8 @@
 "use client";
 
-import { Card, Dropdown } from "flowbite-react";
+import { Card } from "flowbite-react";
 import Link from "next/link";
-import React, { cache, use, useEffect, useState } from "react";
+import React from "react";
 import useSWR from "swr";
 import Spinners from "./Spinners";
 

@@ -1,10 +1,8 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { getServerSession } from "next-auth/next";
-import { useRouter } from "next/navigation";
 
-import React, { useEffect } from "react";
+import React from "react";
 
 const Login = () => {
   return (

@@ -1,6 +1,5 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { getServerSession, Session } from "next-auth";
-import { notFound } from "next/navigation";
+import { getServerSession } from "next-auth";
 import React from "react";
 import UserPrompt from "./components/UserPrompt";
 
@@ -9,16 +8,16 @@ const Home = async () => {
 
   if (!session) {
     return (
-      <>
+      <div>
         <h1 className="text-center">Welcome to your personal banking app!</h1>
-      </>
+      </div>
     );
   }
 
   return (
-    <main className="">
+    <div>
       <UserPrompt email={session?.user?.email} image={session?.user?.image} />
-    </main>
+    </div>
   );
 };
 
