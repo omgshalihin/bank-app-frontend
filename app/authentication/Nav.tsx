@@ -3,6 +3,7 @@ import Login from "./Login";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../pages/api/auth/[...nextauth]";
 import Logged from "./Logged";
+import ThemeToggler from "../components/ThemeToggler";
 
 export default async function Nav() {
   const session = await getServerSession(authOptions);
@@ -12,6 +13,7 @@ export default async function Nav() {
       <Link href={"/"}>
         <h1 className="font-bold text-lg">Home</h1>
       </Link>
+      <ThemeToggler />
       <ul className="flex items-center gap-6">
         {!session?.user && <Login />}
         {session?.user && (

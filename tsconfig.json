@@ -30,7 +30,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/layout.jsx",
-    "app/register/not-found.js"
+    "app/register/not-found.js",
+    "app/components/ThemeToggler.jsx"
   ],
   "exclude": ["node_modules"]
 }
