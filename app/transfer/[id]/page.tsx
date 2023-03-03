@@ -1,5 +1,4 @@
 import React from "react";
-import Deposit from "@/app/components/Deposit";
 import Transfer from "./Transfer";
 
 async function getData(id: string) {
@@ -19,8 +18,6 @@ async function getData(id: string) {
 const page = async ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const data = await getData(id);
-
-  console.log(data);
 
   return (
     <div>

@@ -155,8 +155,8 @@ const UserProfile = ({ id, image }: User) => {
               </div>
             </div>
           </Link>
-          <a
-            href="#"
+          <Link
+            href={`transfer/${data.id}`}
             className="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 sm:w-auto"
           >
             <BiTransfer className="mr-3 h-7 w-7" />
@@ -166,7 +166,7 @@ const UserProfile = ({ id, image }: User) => {
                 Transfer
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       </Card>
       <div className="flex flex-col gap-4 justify-center items-center min-w-auto">

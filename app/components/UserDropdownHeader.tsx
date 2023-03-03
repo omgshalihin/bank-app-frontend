@@ -2,7 +2,7 @@
 
 import { Dropdown } from "flowbite-react";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import React from "react";
 import useSWR from "swr";
 
@@ -19,19 +19,20 @@ const UserDropdownHeader = ({ name, email }: User) => {
     `http://localhost:8080/api/users/account/${email}`,
     fetcher
   );
-  const router = useRouter();
+
   return (
     <>
       <Dropdown label="Navigate">
         <Dropdown.Header>
           <span className="block text-sm">{name}</span>
           <span className="block truncate text-sm font-medium">{email}</span>
-          {/* <span className="block truncate text-sm font-medium">{data?.id}</span> */}
         </Dropdown.Header>
-        <Dropdown.Item onClick={() => router.push(`/dashboard/${data?.id}`)}>
-          My Dashboard
-        </Dropdown.Item>
-        <Dropdown.Item>Pay & Transfer</Dropdown.Item>
+        <Link href={`/dashboard/${data?.id}`}>
+          <Dropdown.Item>My Dashboard</Dropdown.Item>
+        </Link>
+        <Link href={`/transfer/${data?.id}`}>
+          <Dropdown.Item>Pay & Transfer</Dropdown.Item>
+        </Link>
         <Dropdown.Item>Invest</Dropdown.Item>
         <Dropdown.Item>Settings</Dropdown.Item>
         <Dropdown.Divider />
