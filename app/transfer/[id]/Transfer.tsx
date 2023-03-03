@@ -4,6 +4,8 @@ import { Button, Checkbox, Label, Table, TextInput } from "flowbite-react";
 import { BiTransfer } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import { HiCash, HiMail } from "react-icons/hi";
+import Email from "next-auth/providers/email";
 
 interface User {
   id: string;
@@ -102,23 +104,37 @@ const Deposit = ({ data }: any) => {
           onChange={(e) => transferAmount(e)}
           type="number"
           min={0}
-          className="mb-5"
+          icon={HiCash}
+          placeholder="amount"
+          color={`${amount ? "success" : "failure"}`}
+          helperText={`${amount ? "Alright!" : "Please enter a valid amount!"}`}
         />
       </div>
-      <div className="flex flex-col items-center align-middle">
+      <div className="mt-3 flex flex-col items-center align-middle">
         <div className="mb-2 block text-center">
           <Label htmlFor="email" value="Email of recipient" />
         </div>
         <TextInput
+          id="email"
           type="email"
+          icon={HiMail}
           onChange={(e) => recipientEmail(e)}
           placeholder="recipient@email.com"
           required={true}
-          className="mb-5"
+          color={`${
+            recipient.includes("@") && recipient.includes(".com")
+              ? "success"
+              : "failure"
+          }`}
+          helperText={`${
+            recipient.includes("@") && recipient.includes(".com")
+              ? "Alright!"
+              : "Please enter a valid email address!"
+          }`}
         />
       </div>
 
-      <Table>
+      <Table className="mt-7">
         <Table.Head>
           <Table.HeadCell className="!p-4">
             <Checkbox />

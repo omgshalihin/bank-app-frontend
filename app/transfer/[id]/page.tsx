@@ -25,7 +25,6 @@ const page = async ({ params }: { params: { id: string } }) => {
   return (
     <div>
       <Transfer data={data} />
-      <h1>Make transfer to other users by email</h1>
     </div>
   );
 };
