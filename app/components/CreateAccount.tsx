@@ -1,41 +1,13 @@
 "use client";
 
 import { Button, Label, TextInput } from "flowbite-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import useSWR from "swr";
 import React, { useState } from "react";
-import Spinners from "./Spinners";
 
 interface User {
   id: string;
 }
 
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
-
 const CreateAccount = ({ id }: User) => {
-  const { data, error, isLoading } = useSWR(
-    `http://localhost:8080/api/users/${id}`,
-    fetcher
-  );
-
-  if (error)
-    return (
-      <div>
-        <p>It seems that you are not a member</p>
-        <Link href={"/register"}>Click</Link>
-      </div>
-    );
-  if (isLoading)
-    return (
-      <div>
-        <Spinners />
-      </div>
-    );
-
-  const router = useRouter();
-
   const [name, setName] = useState("");
   const [amount, setAmount] = useState<number>(0);
 
@@ -52,8 +24,12 @@ const CreateAccount = ({ id }: User) => {
   };
 
   const handleCreation = () => {
+    putData(name, amount);
+  };
+
+  const putData = (name: string, amount: number) => {
     const newAccountData = {
-      accountName: name,
+      accountName: `${name}`,
       accountBalance: amount,
     };
     fetch(`http://localhost:8080/api/users/${id}`, {
@@ -64,7 +40,6 @@ const CreateAccount = ({ id }: User) => {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
-    router.push("/account/success");
   };
 
   return (
@@ -94,9 +69,9 @@ const CreateAccount = ({ id }: User) => {
             shadow={true}
           />
         </div>
-        <Button type="button" onClick={() => handleCreation()}>
-          Register new account
-        </Button>
+        <form action={`/dashboard/${id}`} onClick={handleCreation}>
+          <Button type="submit">Register new account</Button>
+        </form>
       </form>
     </div>
   );

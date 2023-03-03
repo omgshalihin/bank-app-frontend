@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, Checkbox, Label, Table, TextInput } from "flowbite-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
