@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 import useSWR from "swr";
 import Spinners from "./Spinners";
-import { HiCheck, HiExclamation, HiX, HiIdentification } from "react-icons/hi";
+import { HiCheck, HiExclamation, HiX } from "react-icons/hi";
 import { BsCashCoin } from "react-icons/bs";
 import { BiTransfer } from "react-icons/bi";
 import { GiPayMoney } from "react-icons/gi";
@@ -92,7 +92,7 @@ const UserProfile = ({ id, image }: User) => {
             Accounts
           </h5>
           <Link
-            href="/account"
+            href={`/account/${id}`}
             className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
           >
             Create
