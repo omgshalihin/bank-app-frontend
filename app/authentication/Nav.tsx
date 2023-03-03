@@ -13,7 +13,7 @@ export default async function Nav() {
       <Link href={"/"}>
         <h1 className="font-bold text-lg">Home</h1>
       </Link>
-      <ThemeToggler />
+
       <ul className="flex items-center gap-6">
         {!session?.user && <Login />}
         {session?.user && (
@@ -22,6 +22,7 @@ export default async function Nav() {
             email={session.user?.email || ""}
           />
         )}
+        <ThemeToggler />
       </ul>
     </nav>
   );

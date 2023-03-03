@@ -24,6 +24,7 @@ const Deposit = ({ data }: any) => {
   const [checkBoxStatus, setCheckBoxStatus] = useState({
     status: false,
     accountName: "",
+    accountBalance: 0,
   });
   const pathName = usePathname();
   const userId = pathName?.split("/")[2];
@@ -33,12 +34,13 @@ const Deposit = ({ data }: any) => {
     setAmount(parseFloat(value));
   };
 
-  const handleCheckBox = (e: any, name: string) => {
+  const handleCheckBox = (e: any, name: string, balance: number) => {
     const isChecked = e.target.checked;
 
     setCheckBoxStatus({
       status: isChecked,
       accountName: name,
+      accountBalance: balance,
     });
   };
 
@@ -100,7 +102,13 @@ const Deposit = ({ data }: any) => {
               <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                 <Table.Cell className="!p-4">
                   <Checkbox
-                    onClick={(e) => handleCheckBox(e, account.accountName)}
+                    onClick={(e) =>
+                      handleCheckBox(
+                        e,
+                        account.accountName,
+                        account.accountBalance
+                      )
+                    }
                   />
                 </Table.Cell>
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -120,7 +128,8 @@ const Deposit = ({ data }: any) => {
                       gradientDuoTone="greenToBlue"
                       disabled={
                         checkBoxStatus.status &&
-                        checkBoxStatus.accountName === account.accountName
+                        checkBoxStatus.accountName === account.accountName &&
+                        checkBoxStatus.accountBalance === account.accountBalance
                           ? false
                           : true
                       }
