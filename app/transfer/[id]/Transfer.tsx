@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Checkbox, Label, Table, TextInput } from "flowbite-react";
+import { BiTransfer } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
@@ -21,6 +22,7 @@ interface Account {
 const Deposit = ({ data }: any) => {
   const [userData, setUserData] = useState<User>(data);
   const [amount, setAmount] = useState<number>(0);
+  const [recipient, setRecipient] = useState<string>("");
   const [checkBoxStatus, setCheckBoxStatus] = useState({
     status: false,
     accountName: "",
@@ -28,9 +30,14 @@ const Deposit = ({ data }: any) => {
   const pathName = usePathname();
   const userId = pathName?.split("/")[2];
 
-  const depositAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const transferAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setAmount(parseFloat(value));
+  };
+
+  const recipientEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setRecipient(value);
   };
 
   const handleCheckBox = (e: any, name: string) => {
@@ -42,16 +49,16 @@ const Deposit = ({ data }: any) => {
     });
   };
 
-  const handleConfirm = (account: Account) => {
+  const handleSend = (account: Account, recipient: string) => {
     const accountId = account.accountId;
     const balance = account.accountBalance;
-    const depositAmount = amount;
-    const projectedBalance = balance + depositAmount;
-
-    patchData(accountId, projectedBalance);
+    const transferAmount = amount;
+    const projectedBalance = balance - transferAmount;
+    patchUserData(accountId, projectedBalance);
+    putRecipientData(recipient, transferAmount);
   };
 
-  const patchData = (accountId: string, projectedBalance: number) => {
+  const patchUserData = (accountId: string, projectedBalance: number) => {
     const dataToPatch = {
       accountBalance: `${projectedBalance}`,
     };
@@ -67,17 +74,46 @@ const Deposit = ({ data }: any) => {
     });
   };
 
+  const putRecipientData = (recipient: string, transferAmount: number) => {
+    const dataToPut = {
+      accountName: `From: ${userData.userName}`,
+      accountBalance: transferAmount,
+    };
+
+    const url = `http://localhost:8080/api/users/transfer/${recipient}`;
+    fetch(url, {
+      method: "PUT",
+      mode: "cors",
+      body: JSON.stringify(dataToPut),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+  };
+
   return (
     <div>
       <div className="flex flex-col items-center align-middle">
         <div className="mb-2 block text-center">
-          <Label value="How much do you wish to deposit?" />
+          <Label value="How much do you wish to transfer" />
         </div>
         <TextInput
           sizing="sm"
-          onChange={(e) => depositAmount(e)}
+          onChange={(e) => transferAmount(e)}
           type="number"
           min={0}
+          className="mb-5"
+        />
+      </div>
+      <div className="flex flex-col items-center align-middle">
+        <div className="mb-2 block text-center">
+          <Label htmlFor="email" value="Email of recipient" />
+        </div>
+        <TextInput
+          type="email"
+          onChange={(e) => recipientEmail(e)}
+          placeholder="recipient@email.com"
+          required={true}
           className="mb-5"
         />
       </div>
@@ -108,12 +144,12 @@ const Deposit = ({ data }: any) => {
                 </Table.Cell>
                 <Table.Cell>${account.accountBalance}</Table.Cell>
                 <Table.Cell>
-                  ${account.accountBalance + (amount ? amount : 0)}
+                  ${account.accountBalance - (amount ? amount : 0)}
                 </Table.Cell>
                 <Table.Cell>
                   <form
                     action={`/dashboard/${userId}`}
-                    onSubmit={() => handleConfirm(account)}
+                    onSubmit={() => handleSend(account, recipient)}
                   >
                     <Button
                       type="submit"
@@ -125,7 +161,8 @@ const Deposit = ({ data }: any) => {
                           : true
                       }
                     >
-                      Confirm
+                      <BiTransfer className="mr-3 h-7 w-7" />
+                      Send
                     </Button>
                   </form>
                 </Table.Cell>
