@@ -3,7 +3,7 @@ import Spinners from "./components/Spinners";
 
 const loading = () => {
   return (
-    <div>
+    <div className="h-screen">
       <Spinners />
     </div>
   );
