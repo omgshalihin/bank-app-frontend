@@ -1,9 +1,11 @@
 "use client";
 
 import { Button, Label, TextInput } from "flowbite-react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const Register = ({ email, image }: any) => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     userName: "",
     userEmail: email,
@@ -22,26 +24,22 @@ const Register = ({ email, image }: any) => {
     }));
   };
 
-  const submitForm = () => {
+  const handleCreation = () => {
+    console.log("hey");
+    submitForm();
+  };
+
+  const submitForm = async () => {
     const url = "https://bank-app-backend-production.up.railway.app/api/users";
-    fetch(url, {
+    await fetch(url, {
       method: "POST",
       mode: "cors",
       body: JSON.stringify(formData),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setFormData({
-          userName: "",
-          userEmail: "",
-          userImage: "",
-        });
-        setFormSuccess(true);
-        setFormSuccessMessage(data.submission_text);
-      });
+    });
+    router.push("/register/success");
   };
 
   return (
@@ -89,7 +87,7 @@ const Register = ({ email, image }: any) => {
             readOnly={true}
           />
         </div>
-        <Button type="submit">Become a member</Button>
+        <Button onClick={handleCreation}>Become a member</Button>
       </form>
     </div>
   );

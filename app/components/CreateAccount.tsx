@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Label, TextInput } from "flowbite-react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 interface User {
@@ -10,6 +11,7 @@ interface User {
 const CreateAccount = ({ id }: User) => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState<number>(0);
+  const router = useRouter();
 
   const registerName = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -24,15 +26,16 @@ const CreateAccount = ({ id }: User) => {
   };
 
   const handleCreation = () => {
+    console.log("hey");
     putData(name, amount);
   };
 
-  const putData = (name: string, amount: number) => {
+  const putData = async (name: string, amount: number) => {
     const newAccountData = {
       accountName: `${name}`,
       accountBalance: amount,
     };
-    fetch(
+    await fetch(
       `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
       {
         method: "PUT",
@@ -43,6 +46,7 @@ const CreateAccount = ({ id }: User) => {
         },
       }
     );
+    router.push(`/dashboard/${id}`);
   };
 
   return (
@@ -72,8 +76,11 @@ const CreateAccount = ({ id }: User) => {
             shadow={true}
           />
         </div>
-        <form action={`/dashboard/${id}`} onClick={handleCreation}>
-          <Button type="submit">Register new account</Button>
+        <form
+          // action={`/dashboard/${id}`}
+          onClick={handleCreation}
+        >
+          <Button type="button">Register new account</Button>
         </form>
       </form>
     </div>
