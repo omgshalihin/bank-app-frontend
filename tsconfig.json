@@ -31,7 +31,8 @@
     ".next/types/**/*.ts",
     "app/layout.jsx",
     "app/register/not-found.js",
-    "app/components/ThemeToggler.jsx"
+    "app/components/ThemeToggler.jsx",
+    "pages/auth/signin.js"
   ],
   "exclude": ["node_modules"]
 }

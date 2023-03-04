@@ -2,7 +2,7 @@
 
 import { Card, Toast } from "flowbite-react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import Spinners from "./Spinners";
 import { HiCheck, HiExclamation, HiX } from "react-icons/hi";
@@ -10,6 +10,7 @@ import { BsCashCoin } from "react-icons/bs";
 import { BiTransfer } from "react-icons/bi";
 import { GiPayMoney } from "react-icons/gi";
 import { MdEmail, MdPermIdentity } from "react-icons/md";
+import TransactionHistory from "./TransactionHistory";
 
 interface User {
   id: string;
@@ -127,6 +128,7 @@ const UserProfile = ({ id, image }: User) => {
           </ul>
         </div>
       </Card>
+
       <Card>
         <div className="flex flex-col items-center pb-10">
           <h5 className="pt-10 mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
@@ -169,29 +171,24 @@ const UserProfile = ({ id, image }: User) => {
           </Link>
         </div>
       </Card>
-      <div className="flex flex-col gap-4 justify-center items-center min-w-auto">
-        <Toast>
-          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
-            <HiCheck className="h-5 w-5" />
-          </div>
-          <div className="ml-3 text-sm font-normal">Task 1</div>
-          <Toast.Toggle />
-        </Toast>
-        <Toast>
-          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
-            <HiX className="h-5 w-5" />
-          </div>
-          <div className="ml-3 text-sm font-normal">Task 2</div>
-          <Toast.Toggle />
-        </Toast>
-        <Toast>
-          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500 dark:bg-orange-700 dark:text-orange-200">
-            <HiExclamation className="h-5 w-5" />
-          </div>
-          <div className="ml-3 text-sm font-normal">Task 3</div>
-          <Toast.Toggle />
-        </Toast>
-      </div>
+      <Card>
+        <div className="mb-4 flex items-center justify-between">
+          <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+            Transactions History
+          </h5>
+          {/* <Link
+            href={`/account/${id}`}
+            className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+          >
+            Create
+          </Link> */}
+        </div>
+        <div className="flow-root">
+          <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+            <TransactionHistory />
+          </ul>
+        </div>
+      </Card>
     </div>
   );
 };

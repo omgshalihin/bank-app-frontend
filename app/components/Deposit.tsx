@@ -50,7 +50,18 @@ const Deposit = ({ data }: any) => {
     const depositAmount = amount;
     const projectedBalance = balance + depositAmount;
 
+    // for transaction history
+    const accountName = account.accountName;
+    const transactionStatus = "+";
+    const transactionAmount = amount;
+
     patchData(accountId, projectedBalance);
+    putTransactionHistory(
+      accountId,
+      accountName,
+      transactionStatus,
+      transactionAmount
+    );
   };
 
   const patchData = (accountId: string, projectedBalance: number) => {
@@ -61,6 +72,30 @@ const Deposit = ({ data }: any) => {
     const url = `https://bank-app-backend-production.up.railway.app/api/users/${userId}?account=${accountId}`;
     fetch(url, {
       method: "PATCH",
+      mode: "cors",
+      body: JSON.stringify(dataToPatch),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+  };
+
+  const putTransactionHistory = (
+    accountId: string,
+    accountName: string,
+    transactionStatus: string,
+    transactionAmount: number
+  ) => {
+    const dataToPatch = {
+      accountId: `${accountId}`,
+      accountName: `${accountName}`,
+      transactionStatus: `${transactionStatus}`,
+      transactionAmount: transactionAmount,
+    };
+
+    const url = `https://bank-app-backend-production.up.railway.app/api/users/history/${userId}`;
+    fetch(url, {
+      method: "PUT",
       mode: "cors",
       body: JSON.stringify(dataToPatch),
       headers: {

@@ -8,7 +8,6 @@ import ThemeToggler from "../components/ThemeToggler";
 const navigation = [
   { name: "Product", href: "#" },
   { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
   { name: "Company", href: "#" },
 ];
 
@@ -55,7 +54,10 @@ export default async function Nav() {
         ))}
         <ThemeToggler />
       </div>
-      <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+      <div className="lg:hidden">
+        <ThemeToggler />
+      </div>
+      <div className="lg:flex lg:flex-1 lg:justify-end">
         {!session ? (
           <Login />
         ) : (
