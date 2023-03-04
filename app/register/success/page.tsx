@@ -1,3 +1,4 @@
+import OverlaySuccess from "@/app/components/OverlaySuccess";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { Session, User, getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
@@ -28,7 +29,8 @@ const page = async () => {
   const data = await getData(session);
   return (
     <div>
-      <Success id={data.id} />
+      {/* <Success id={data.id} /> */}
+      <OverlaySuccess id={data.id} />
     </div>
   );
 };
