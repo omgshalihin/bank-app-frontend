@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { HiCash, HiMail } from "react-icons/hi";
 import Email from "next-auth/providers/email";
+import useSWR from "swr";
 
 interface User {
   id: string;
@@ -21,7 +22,14 @@ interface Account {
   accountBalance: number;
 }
 
-const Deposit = ({ data }: any) => {
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
+
+const Transfer = ({ id }: any) => {
+  const { data, error, isLoading } = useSWR(
+    `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
+    fetcher
+  );
   const [userData, setUserData] = useState<User>(data);
   const [amount, setAmount] = useState<number>(0);
   const [recipient, setRecipient] = useState<string>("");
@@ -200,4 +208,4 @@ const Deposit = ({ data }: any) => {
   );
 };
 
-export default Deposit;
+export default Transfer;

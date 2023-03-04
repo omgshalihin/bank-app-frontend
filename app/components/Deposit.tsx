@@ -35,8 +35,7 @@ const Deposit = ({ id }: any) => {
     accountName: "",
     accountBalance: 0,
   });
-  const pathName = usePathname();
-  const userId = pathName?.split("/")[2];
+
   const router = useRouter();
 
   const depositAmount = (e: React.ChangeEvent<HTMLInputElement>) => {

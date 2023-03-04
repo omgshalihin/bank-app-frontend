@@ -23,7 +23,7 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      <Transfer data={data} />
+      <Transfer id={params.id} />
     </div>
   );
 };
