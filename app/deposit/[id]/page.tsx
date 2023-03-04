@@ -23,7 +23,7 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      <Deposit data={data} />
+      <Deposit id={id} data={data} />
     </div>
   );
 };

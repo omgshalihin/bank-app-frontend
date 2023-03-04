@@ -185,7 +185,7 @@ const UserProfile = ({ id, image }: User) => {
         </div>
         <div className="flow-root">
           <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-            <TransactionHistory />
+            <TransactionHistory data={data} />
           </ul>
         </div>
       </Card>

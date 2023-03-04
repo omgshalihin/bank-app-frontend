@@ -1,8 +1,9 @@
 "use client";
 
 import { Button, Checkbox, Label, Table, TextInput } from "flowbite-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
+import useSWR from "swr";
 
 interface User {
   id: string;
@@ -18,7 +19,15 @@ interface Account {
   accountBalance: number;
 }
 
-const Deposit = ({ data }: any) => {
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
+
+const Deposit = ({ id }: any) => {
+  const { data, error, isLoading } = useSWR(
+    `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
+    fetcher
+  );
+
   const [userData, setUserData] = useState<User>(data);
   const [amount, setAmount] = useState<number>(0);
   const [checkBoxStatus, setCheckBoxStatus] = useState({
@@ -28,6 +37,7 @@ const Deposit = ({ data }: any) => {
   });
   const pathName = usePathname();
   const userId = pathName?.split("/")[2];
+  const router = useRouter();
 
   const depositAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -44,7 +54,7 @@ const Deposit = ({ data }: any) => {
     });
   };
 
-  const handleConfirm = (account: Account) => {
+  const handleConfirm = async (account: Account) => {
     const accountId = account.accountId;
     const balance = account.accountBalance;
     const depositAmount = amount;
@@ -55,53 +65,52 @@ const Deposit = ({ data }: any) => {
     const transactionStatus = "+";
     const transactionAmount = amount;
 
-    patchData(accountId, projectedBalance);
-    putTransactionHistory(
-      accountId,
-      accountName,
-      transactionStatus,
-      transactionAmount
-    );
-  };
-
-  const patchData = (accountId: string, projectedBalance: number) => {
     const dataToPatch = {
       accountBalance: `${projectedBalance}`,
     };
 
-    const url = `https://bank-app-backend-production.up.railway.app/api/users/${userId}?account=${accountId}`;
-    fetch(url, {
-      method: "PATCH",
-      mode: "cors",
-      body: JSON.stringify(dataToPatch),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-  };
-
-  const putTransactionHistory = (
-    accountId: string,
-    accountName: string,
-    transactionStatus: string,
-    transactionAmount: number
-  ) => {
-    const dataToPatch = {
+    const dataToPut = {
       accountId: `${accountId}`,
       accountName: `${accountName}`,
       transactionStatus: `${transactionStatus}`,
       transactionAmount: transactionAmount,
     };
 
-    const url = `https://bank-app-backend-production.up.railway.app/api/users/history/${userId}`;
-    fetch(url, {
-      method: "PUT",
-      mode: "cors",
-      body: JSON.stringify(dataToPatch),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
+    patchAndPutData(accountId, dataToPatch, dataToPut);
+  };
+
+  const patchAndPutData = async (
+    accountId: string,
+    dataToPatch: { accountBalance: string },
+    dataToPut: {
+      accountId: string;
+      accountName: string;
+      transactionStatus: string;
+      transactionAmount: number;
+    }
+  ) => {
+    const url = `https://bank-app-backend-production.up.railway.app/api/users/${id}?account=${accountId}`;
+    const url2 = `https://bank-app-backend-production.up.railway.app/api/users/history/${id}`;
+
+    await Promise.all([
+      await fetch(url, {
+        method: "PATCH",
+        mode: "cors",
+        body: JSON.stringify(dataToPatch),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      await fetch(url2, {
+        method: "PUT",
+        mode: "cors",
+        body: JSON.stringify(dataToPut),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    ]);
+    router.push(`/dashboard/${id}`);
   };
 
   return (
@@ -156,11 +165,11 @@ const Deposit = ({ data }: any) => {
                 <Table.Cell>
                   <form
                     action={`/dashboard/${userId}`}
-                    onSubmit={() => handleConfirm(account)}
+                    onClick={() => handleConfirm(account)}
                   >
                     <Button
-                      type="submit"
                       gradientDuoTone="greenToBlue"
+                      type="button"
                       disabled={
                         checkBoxStatus.status &&
                         checkBoxStatus.accountName === account.accountName &&
