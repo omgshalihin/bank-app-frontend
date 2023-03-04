@@ -5,25 +5,66 @@ import { authOptions } from "../../pages/api/auth/[...nextauth]";
 import Logged from "./Logged";
 import ThemeToggler from "../components/ThemeToggler";
 
+const navigation = [
+  { name: "Product", href: "#" },
+  { name: "Features", href: "#" },
+  { name: "Marketplace", href: "#" },
+  { name: "Company", href: "#" },
+];
+
 export default async function Nav() {
   const session = await getServerSession(authOptions);
 
   return (
-    <nav className="flex justify-between items-center py-8">
-      <Link href={"/"}>
-        <h1 className="font-bold text-lg">Home</h1>
-      </Link>
+    // <nav className="flex justify-between items-center py-8">
+    //   <Link href={"/"}>
+    //     <h1 className="font-bold text-lg">Home</h1>
+    //   </Link>
 
-      <ul className="flex items-center gap-6">
-        {!session?.user && <Login />}
-        {session?.user && (
+    //   <ul className="flex items-center gap-6">
+    //     {!session?.user && <Login />}
+    //     {session?.user && (
+    // <Logged
+    //   name={session.user?.name || ""}
+    //   email={session.user?.email || ""}
+    // />
+    //     )}
+    //
+    //   </ul>
+    // </nav>
+    <nav className="flex items-center justify-between py-8" aria-label="Global">
+      <div className="flex lg:flex-1">
+        <Link href={"/"} className="-m-1.5 p-1.5">
+          <span className="sr-only">Your Company</span>
+          <img
+            className="h-8"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            alt=""
+          />
+        </Link>
+      </div>
+      <div className="hidden lg:flex lg:gap-x-12">
+        {navigation.map((item) => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className="text-sm font-semibold leading-6"
+          >
+            {item.name}
+          </Link>
+        ))}
+        <ThemeToggler />
+      </div>
+      <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        {!session ? (
+          <Login />
+        ) : (
           <Logged
             name={session.user?.name || ""}
             email={session.user?.email || ""}
           />
         )}
-        <ThemeToggler />
-      </ul>
+      </div>
     </nav>
   );
 }

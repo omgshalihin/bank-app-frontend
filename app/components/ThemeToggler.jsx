@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import Spinners from "./Spinners";
+import { Spinner } from "flowbite-react";
 
 export default function ThemeToggler() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -11,7 +13,7 @@ export default function ThemeToggler() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <></>;
+  if (!mounted) return <Spinner size="sm" />;
 
   return (
     <button

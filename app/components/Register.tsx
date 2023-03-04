@@ -3,12 +3,7 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 
-type User = {
-  email: string;
-  image: string;
-};
-
-const Register = ({ email, image }: User) => {
+const Register = ({ email, image }: any) => {
   const [formData, setFormData] = useState({
     userName: "",
     userEmail: email,

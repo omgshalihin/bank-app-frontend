@@ -20,8 +20,15 @@ const UserDropdownHeader = ({ name, email }: User) => {
     fetcher
   );
 
+  if (error)
+    return (
+      <Link href={`/register`}>
+        Register <span aria-hidden="true">&rarr;</span>
+      </Link>
+    );
+
   return (
-    <>
+    <div>
       <Dropdown label="Navigate">
         <Dropdown.Header>
           <span className="block text-sm">{name}</span>
@@ -40,7 +47,7 @@ const UserDropdownHeader = ({ name, email }: User) => {
           Sign out
         </Dropdown.Item>
       </Dropdown>
-    </>
+    </div>
   );
 };
 
