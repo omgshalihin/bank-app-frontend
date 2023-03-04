@@ -7,7 +7,7 @@ import Success from "./Success";
 
 async function getData(session: Session): Promise<User> {
   const res = await fetch(
-    `http://localhost:8080/api/users/account/${session?.user?.email}`
+    `https://bank-app-backend-production.up.railway.app/api/users/account/${session?.user?.email}`
   );
   if (!res.ok) {
     notFound();

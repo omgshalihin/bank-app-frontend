@@ -7,7 +7,9 @@ import Prompts from "./components/Prompts";
 
 async function getData(session: Session) {
   const email = session?.user?.email;
-  const res = await fetch(`http://localhost:8080/api/users/account/${email}`);
+  const res = await fetch(
+    `https://bank-app-backend-production.up.railway.app/api/users/account/${email}`
+  );
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 

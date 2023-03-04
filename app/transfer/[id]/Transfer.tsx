@@ -67,7 +67,7 @@ const Deposit = ({ data }: any) => {
       accountBalance: `${projectedBalance}`,
     };
 
-    const url = `http://localhost:8080/api/users/${userId}?account=${accountId}`;
+    const url = `https://bank-app-backend-production.up.railway.app/api/users/${userId}?account=${accountId}`;
     fetch(url, {
       method: "PATCH",
       mode: "cors",
@@ -84,7 +84,7 @@ const Deposit = ({ data }: any) => {
       accountBalance: transferAmount,
     };
 
-    const url = `http://localhost:8080/api/users/transfer/${recipient}`;
+    const url = `https://bank-app-backend-production.up.railway.app/api/users/transfer/${recipient}`;
     fetch(url, {
       method: "PUT",
       mode: "cors",

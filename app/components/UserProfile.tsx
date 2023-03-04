@@ -27,7 +27,7 @@ const fetcher = (url: RequestInfo | URL) =>
 
 const UserProfile = ({ id, image }: User) => {
   const { data, error, isLoading } = useSWR(
-    `http://localhost:8080/api/users/${id}`,
+    `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
     fetcher
   );
 

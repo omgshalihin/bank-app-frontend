@@ -2,7 +2,9 @@ import UserProfile from "@/app/components/UserProfile";
 import React from "react";
 
 async function getData(id: string) {
-  const res = await fetch(`http://localhost:8080/api/users/${id}`);
+  const res = await fetch(
+    `https://bank-app-backend-production.up.railway.app/api/users/${id}`
+  );
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 

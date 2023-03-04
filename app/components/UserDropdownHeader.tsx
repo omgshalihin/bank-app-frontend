@@ -16,7 +16,7 @@ const fetcher = (url: RequestInfo | URL) =>
 
 const UserDropdownHeader = ({ name, email }: User) => {
   const { data, error, isLoading } = useSWR(
-    `http://localhost:8080/api/users/account/${email}`,
+    `https://bank-app-backend-production.up.railway.app/api/users/account/${email}`,
     fetcher
   );
 

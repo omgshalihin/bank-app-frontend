@@ -32,14 +32,17 @@ const CreateAccount = ({ id }: User) => {
       accountName: `${name}`,
       accountBalance: amount,
     };
-    fetch(`http://localhost:8080/api/users/${id}`, {
-      method: "PUT",
-      mode: "cors",
-      body: JSON.stringify(newAccountData),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
+    fetch(
+      `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
+      {
+        method: "PUT",
+        mode: "cors",
+        body: JSON.stringify(newAccountData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
   };
 
   return (

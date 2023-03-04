@@ -23,7 +23,7 @@ const Register = ({ email, image }: any) => {
   };
 
   const submitForm = () => {
-    const url = "http://localhost:8080/api/users";
+    const url = "https://bank-app-backend-production.up.railway.app/api/users";
     fetch(url, {
       method: "POST",
       mode: "cors",
