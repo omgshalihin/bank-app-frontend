@@ -88,6 +88,13 @@ const Transfer = ({ id }: any) => {
       transactionAmount: transactionAmount,
     };
 
+    const dataToPutRecipientHistory = {
+      accountId: `${accountId}`,
+      accountName: `${accountName}`,
+      transactionStatus: "+",
+      transactionAmount: transactionAmount,
+    };
+
     // patchUserData(accountId, dataToPatch);
 
     // putRecipientData(recipient, transferAmount);
@@ -97,7 +104,8 @@ const Transfer = ({ id }: any) => {
       dataToPatch,
       dataToPut,
       recipient,
-      dataToPutHistory
+      dataToPutHistory,
+      dataToPutRecipientHistory
     );
   };
 
@@ -111,11 +119,18 @@ const Transfer = ({ id }: any) => {
       accountName: string;
       transactionStatus: string;
       transactionAmount: number;
+    },
+    dataToPutRecipientHistory: {
+      accountId: string;
+      accountName: string;
+      transactionStatus: string;
+      transactionAmount: number;
     }
   ) => {
     const url = `https://bank-app-backend-production.up.railway.app/api/users/${id}?account=${accountId}`;
     const url2 = `https://bank-app-backend-production.up.railway.app/api/users/transfer/${recipient}`;
     const url3 = `https://bank-app-backend-production.up.railway.app/api/users/history/${id}`;
+    const url4 = `https://bank-app-backend-production.up.railway.app/api/users/transfer/history/${recipient}`;
 
     await Promise.all([
       await fetch(url, {
@@ -138,6 +153,14 @@ const Transfer = ({ id }: any) => {
         method: "PUT",
         mode: "cors",
         body: JSON.stringify(dataToPutHistory),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      await fetch(url4, {
+        method: "PUT",
+        mode: "cors",
+        body: JSON.stringify(dataToPutRecipientHistory),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
@@ -175,12 +198,14 @@ const Transfer = ({ id }: any) => {
           placeholder="recipient@email.com"
           required={true}
           color={`${
-            recipient.includes("@") && recipient.includes(".com")
+            (recipient.includes("@") && recipient.includes(".com")) ||
+            (recipient.includes("@") && recipient.includes(".se"))
               ? "success"
               : "failure"
           }`}
           helperText={`${
-            recipient.includes("@") && recipient.includes(".com")
+            (recipient.includes("@") && recipient.includes(".com")) ||
+            (recipient.includes("@") && recipient.includes(".se"))
               ? "Alright!"
               : "Please enter a valid email address!"
           }`}

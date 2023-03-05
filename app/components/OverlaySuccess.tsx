@@ -74,12 +74,14 @@ export default function OverlaySuccess({ email }: any) {
                           step closer to productively manage your finances.
                         </p>
                         {!data ? (
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-gray-700">
                             <br />
-                            Please wait while your account is being created.
+                            Note:
+                            <br />
+                            Please wait while we are preparing your dashboard!
                           </p>
                         ) : (
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-green-500">
                             <br />
                             Vist our dashboard to start monitoring your
                             accounts, deposits, transfers, payments and
@@ -95,7 +97,7 @@ export default function OverlaySuccess({ email }: any) {
                     <button
                       disabled={true}
                       type="submit"
-                      className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
+                      className="inline-flex w-full justify-center rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto"
                     >
                       <Spinner aria-label="Spinner button example" />
                       <span className="pl-3">Loading...</span>

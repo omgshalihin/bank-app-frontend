@@ -27,25 +27,48 @@ const CreateAccount = ({ id }: User) => {
 
   const handleCreation = () => {
     console.log("hey");
-    putData(name, amount);
-  };
 
-  const putData = async (name: string, amount: number) => {
     const newAccountData = {
       accountName: `${name}`,
       accountBalance: amount,
     };
-    await fetch(
-      `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
-      {
+    const dataToPutHistory = {
+      accountName: `${name}`,
+      transactionStatus: "+",
+      transactionAmount: amount,
+    };
+    sendDataToServer(newAccountData, dataToPutHistory);
+  };
+
+  const sendDataToServer = async (
+    newAccountData: { accountName: string; accountBalance: number },
+    dataToPutHistory: {
+      accountName: string;
+      transactionStatus: string;
+      transactionAmount: number;
+    }
+  ) => {
+    const urlCreateAccount = `https://bank-app-backend-production.up.railway.app/api/users/${id}`;
+    const urlUpdateHistory = `https://bank-app-backend-production.up.railway.app/api/users/history/${id}`;
+
+    await Promise.all([
+      await fetch(urlCreateAccount, {
         method: "PUT",
         mode: "cors",
         body: JSON.stringify(newAccountData),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
-      }
-    );
+      }),
+      await fetch(urlUpdateHistory, {
+        method: "PUT",
+        mode: "cors",
+        body: JSON.stringify(dataToPutHistory),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    ]);
     router.push(`/dashboard/${id}`);
   };
 
