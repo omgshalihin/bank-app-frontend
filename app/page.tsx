@@ -1,26 +1,26 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession, Session } from "next-auth";
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation";
 import React from "react";
 import Landing from "./components/Landing";
 import Prompts from "./components/Prompts";
 
-async function getData(session: Session) {
-  const email = session?.user?.email;
-  const res = await fetch(
-    `https://bank-app-backend-production.up.railway.app/api/users/account/${email}`
-  );
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+// async function getData(session: Session) {
+//   const email = session?.user?.email;
+//   const res = await fetch(
+//     `https://bank-app-backend-production.up.railway.app/api/users/account/${email}`
+//   );
+//   // The return value is *not* serialized
+//   // You can return Date, Map, Set, etc.
 
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    notFound();
-  }
+//   // Recommendation: handle errors
+//   if (!res.ok) {
+//     // This will activate the closest `error.js` Error Boundary
+//     notFound();
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
@@ -33,8 +33,8 @@ const Home = async () => {
     );
   }
 
-  const data = await getData(session);
-  console.log(data);
+  // const data = await getData(session);
+  // console.log(data);
 
   return (
     <div>
