@@ -5,16 +5,16 @@ import { notFound } from "next/navigation";
 import React from "react";
 import Success from "./Success";
 
-async function getData(session: Session): Promise<User> {
-  const res = await fetch(
-    `https://bank-app-backend-production.up.railway.app/api/users/account/${session?.user?.email}`
-  );
-  if (!res.ok) {
-    notFound();
-  }
+// async function getData(session: Session): Promise<User> {
+//   const res = await fetch(
+//     `https://bank-app-backend-production.up.railway.app/api/users/account/${session?.user?.email}`
+//   );
+//   if (!res.ok) {
+//     notFound();
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
 
 const page = async () => {
   const session = await getServerSession(authOptions);
@@ -26,7 +26,7 @@ const page = async () => {
       </div>
     );
   }
-  const data = await getData(session);
+  // const data = await getData(session);
   return (
     <div>
       {/* <Success id={data.id} /> */}

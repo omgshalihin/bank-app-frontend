@@ -18,6 +18,8 @@ export default function OverlaySuccess({ email }: any) {
 
   const cancelButtonRef = useRef(null);
 
+  console.log(data);
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
