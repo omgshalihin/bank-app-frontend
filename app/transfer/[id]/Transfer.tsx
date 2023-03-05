@@ -2,7 +2,7 @@
 
 import { Button, Checkbox, Label, Table, TextInput } from "flowbite-react";
 import { BiTransfer } from "react-icons/bi";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { HiCash, HiMail } from "react-icons/hi";
 import Email from "next-auth/providers/email";
@@ -38,8 +38,8 @@ const Transfer = ({ id }: any) => {
     accountName: "",
     accountBalance: 0,
   });
-  const pathName = usePathname();
-  const userId = pathName?.split("/")[2];
+
+  const router = useRouter();
 
   const transferAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -61,46 +61,89 @@ const Transfer = ({ id }: any) => {
     });
   };
 
-  const handleSend = (account: Account, recipient: string) => {
+  const handleSend = async (account: Account, recipient: string) => {
     const accountId = account.accountId;
     const balance = account.accountBalance;
     const transferAmount = amount;
     const projectedBalance = balance - transferAmount;
-    patchUserData(accountId, projectedBalance);
-    putRecipientData(recipient, transferAmount);
-  };
 
-  const patchUserData = (accountId: string, projectedBalance: number) => {
+    // for transaction history
+    const accountName = account.accountName;
+    const transactionStatus = "-";
+    const transactionAmount = amount;
+
     const dataToPatch = {
       accountBalance: `${projectedBalance}`,
     };
 
-    const url = `https://bank-app-backend-production.up.railway.app/api/users/${userId}?account=${accountId}`;
-    fetch(url, {
-      method: "PATCH",
-      mode: "cors",
-      body: JSON.stringify(dataToPatch),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-  };
-
-  const putRecipientData = (recipient: string, transferAmount: number) => {
     const dataToPut = {
       accountName: `From: ${userData.userName}`,
       accountBalance: transferAmount,
     };
 
-    const url = `https://bank-app-backend-production.up.railway.app/api/users/transfer/${recipient}`;
-    fetch(url, {
-      method: "PUT",
-      mode: "cors",
-      body: JSON.stringify(dataToPut),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
+    const dataToPutHistory = {
+      accountId: `${accountId}`,
+      accountName: `${accountName}`,
+      transactionStatus: `${transactionStatus}`,
+      transactionAmount: transactionAmount,
+    };
+
+    // patchUserData(accountId, dataToPatch);
+
+    // putRecipientData(recipient, transferAmount);
+
+    sendDataToServer(
+      accountId,
+      dataToPatch,
+      dataToPut,
+      recipient,
+      dataToPutHistory
+    );
+  };
+
+  const sendDataToServer = async (
+    accountId: string,
+    dataToPatch: { accountBalance: string },
+    dataToPut: { accountName: string; accountBalance: number },
+    recipient: string,
+    dataToPutHistory: {
+      accountId: string;
+      accountName: string;
+      transactionStatus: string;
+      transactionAmount: number;
+    }
+  ) => {
+    const url = `https://bank-app-backend-production.up.railway.app/api/users/${id}?account=${accountId}`;
+    const url2 = `https://bank-app-backend-production.up.railway.app/api/users/transfer/${recipient}`;
+    const url3 = `https://bank-app-backend-production.up.railway.app/api/users/history/${id}`;
+
+    await Promise.all([
+      await fetch(url, {
+        method: "PATCH",
+        mode: "cors",
+        body: JSON.stringify(dataToPatch),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      await fetch(url2, {
+        method: "PUT",
+        mode: "cors",
+        body: JSON.stringify(dataToPut),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      await fetch(url3, {
+        method: "PUT",
+        mode: "cors",
+        body: JSON.stringify(dataToPutHistory),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    ]);
+    router.push(`/dashboard/${id}`);
   };
 
   return (
@@ -180,11 +223,11 @@ const Transfer = ({ id }: any) => {
                 </Table.Cell>
                 <Table.Cell>
                   <form
-                    action={`/dashboard/${userId}`}
-                    onSubmit={() => handleSend(account, recipient)}
+                    // action={`/dashboard/${id}`}
+                    onClick={() => handleSend(account, recipient)}
                   >
                     <Button
-                      type="submit"
+                      type="button"
                       gradientDuoTone="greenToBlue"
                       disabled={
                         checkBoxStatus.status &&
