@@ -142,7 +142,13 @@ const Deposit = ({ id }: any) => {
         <Table.Body className="divide-y">
           {userData.userAccount.map((account) => {
             return (
-              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <Table.Row
+                className={`${
+                  !account.accountName.includes("From")
+                    ? "bg-white dark:border-gray-700 dark:bg-gray-800"
+                    : "hidden"
+                }`}
+              >
                 <Table.Cell className="!p-4">
                   <Checkbox
                     onClick={(e) =>

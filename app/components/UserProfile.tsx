@@ -99,12 +99,15 @@ const UserProfile = ({ id, image }: User) => {
             Create
           </Link>
         </div>
-        <div className="flow-root">
+        <div className="flow-root max-h-64 overflow-y-scroll">
           <ul className="divide-y divide-gray-200 dark:divide-gray-700">
             {data.userAccount.map((account: Account) => (
               <li
                 className={`${
-                  account.accountBalance ? "py-3 sm:py-4" : "hidden"
+                  account.accountBalance ||
+                  !account.accountName.includes("From")
+                    ? "py-3 sm:py-4"
+                    : "hidden"
                 }`}
               >
                 <div className="flex items-center space-x-4">
@@ -183,7 +186,7 @@ const UserProfile = ({ id, image }: User) => {
             Create
           </Link> */}
         </div>
-        <div className="flow-root">
+        <div className="flow-root max-h-64 overflow-y-scroll">
           <ul className="divide-y divide-gray-200 dark:divide-gray-700">
             <TransactionHistory data={data} />
           </ul>
