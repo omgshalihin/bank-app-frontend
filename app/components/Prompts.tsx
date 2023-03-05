@@ -16,7 +16,7 @@ interface User {
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 
-const Prompts = ({ email }) => {
+const Prompts = ({ email }: any) => {
   const { data, error, isLoading } = useSWR(
     `https://bank-app-backend-production.up.railway.app/api/users/account/${email}`,
     fetcher
