@@ -9,9 +9,9 @@ import useSWR from "swr";
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 
-export default function OverlaySuccess({ id }: any) {
+export default function OverlaySuccess({ email }: any) {
   const { data, error, isLoading } = useSWR(
-    `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
+    `https://bank-app-backend-production.up.railway.app/api/users/account/${email}`,
     fetcher
   );
   const [open, setOpen] = useState(true);

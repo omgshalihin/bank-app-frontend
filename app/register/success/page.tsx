@@ -30,7 +30,7 @@ const page = async () => {
   return (
     <div>
       {/* <Success id={data.id} /> */}
-      <OverlaySuccess id={data.id} />
+      <OverlaySuccess email={session?.user?.email} />
     </div>
   );
 };
