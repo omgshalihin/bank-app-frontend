@@ -24,13 +24,9 @@ const Register = ({ email, image }: any) => {
     }));
   };
 
-  const handleCreation = async () => {
+  const handleCreation = () => {
     console.log("hey");
-    // submitForm();
-
-    await Promise.all([submitForm()]).then(() =>
-      router.push("/register/success")
-    );
+    submitForm();
   };
 
   const submitForm = async () => {
@@ -43,6 +39,7 @@ const Register = ({ email, image }: any) => {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
+    router.push("/register/success");
   };
 
   return (
