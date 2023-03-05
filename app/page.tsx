@@ -39,13 +39,14 @@ const Home = async () => {
   return (
     <div>
       {/* <UserPrompt email={session?.user?.email} image={session?.user?.image} /> */}
-      <Prompts
+      {/* <Prompts
         id={data.id}
         userName={data.userName}
         userEmail={data.userEmail}
         userImage={data.userImage}
         userAccount={data.userAccount}
-      />
+      /> */}
+      <Prompts email={session?.user?.email} />
     </div>
   );
 };
