@@ -11,8 +11,6 @@ const Register = ({ email, image }: any) => {
     userEmail: email,
     userImage: image,
   });
-  const [formSuccess, setFormSuccess] = useState(false);
-  const [formSuccessMessage, setFormSuccessMessage] = useState("");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fieldName = e.target.name;

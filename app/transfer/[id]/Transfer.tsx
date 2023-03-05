@@ -2,10 +2,9 @@
 
 import { Button, Checkbox, Label, Table, TextInput } from "flowbite-react";
 import { BiTransfer } from "react-icons/bi";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { HiCash, HiMail } from "react-icons/hi";
-import Email from "next-auth/providers/email";
 import useSWR from "swr";
 
 interface User {

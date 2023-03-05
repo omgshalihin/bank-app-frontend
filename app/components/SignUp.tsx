@@ -4,14 +4,6 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    // <div>
-    //   <h2>It seems that you are not a member.</h2>
-    //   <div className="flex flex-wrap items-center gap-2 justify-center">
-    //     <Link href={`/register`}>
-    //       <button>Sign me up!</button>
-    //     </Link>
-    //   </div>
-    // </div>
     <div>
       <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-24 lg:px-8">
         <div className="relative isolate overflow-hidden px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">

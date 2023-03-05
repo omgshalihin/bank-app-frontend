@@ -1,7 +1,6 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
-
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 

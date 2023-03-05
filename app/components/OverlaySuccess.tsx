@@ -3,9 +3,8 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/outline";
-import { useRouter } from "next/navigation";
 import useSWR from "swr";
-import { Button, Spinner } from "flowbite-react";
+import { Spinner } from "flowbite-react";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
@@ -18,8 +17,6 @@ export default function OverlaySuccess({ email }: any) {
   const [open, setOpen] = useState(true);
 
   const cancelButtonRef = useRef(null);
-
-  console.log(data);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -83,7 +80,7 @@ export default function OverlaySuccess({ email }: any) {
                         ) : (
                           <p className="text-sm text-green-500">
                             <br />
-                            Vist our dashboard to start monitoring your
+                            Vist your dashboard to start monitoring your
                             accounts, deposits, transfers, payments and
                             transactions history.
                           </p>
@@ -112,16 +109,6 @@ export default function OverlaySuccess({ email }: any) {
                       </button>
                     </form>
                   )}
-
-                  {/* <form action={`/`}>
-                    <button
-                      type="submit"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" // onClick={() => router.push(`/dashboard/${id}`)}
-                      ref={cancelButtonRef}
-                    >
-                      View homepage
-                    </button>
-                  </form> */}
                 </div>
               </Dialog.Panel>
             </Transition.Child>

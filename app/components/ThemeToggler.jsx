@@ -2,19 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import Spinners from "./Spinners";
 import { Spinner } from "flowbite-react";
 
 export default function ThemeToggler() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-
-  // const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  // if (prefersDark) {
-  //   setTheme("dark");
-  // } else {
-  //   setTheme("light");
-  // }
 
   useEffect(() => {
     setMounted(true);

@@ -3,6 +3,10 @@ import { getServerSession } from "next-auth";
 import React from "react";
 import SignUp from "../components/SignUp";
 
+export const metadata = {
+  title: "Dashboard",
+};
+
 const Home = async () => {
   const session = await getServerSession(authOptions);
 

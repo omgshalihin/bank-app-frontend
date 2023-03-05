@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Checkbox, Label, Table, TextInput } from "flowbite-react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import useSWR from "swr";
 
@@ -168,10 +168,7 @@ const Deposit = ({ id }: any) => {
                   ${account.accountBalance + (amount ? amount : 0)}
                 </Table.Cell>
                 <Table.Cell>
-                  <form
-                    // action={`/dashboard/${userId}`}
-                    onClick={() => handleConfirm(account)}
-                  >
+                  <form onClick={() => handleConfirm(account)}>
                     <Button
                       gradientDuoTone="greenToBlue"
                       type="button"

@@ -99,10 +99,7 @@ const CreateAccount = ({ id }: User) => {
             shadow={true}
           />
         </div>
-        <form
-          // action={`/dashboard/${id}`}
-          onClick={handleCreation}
-        >
+        <form onClick={handleCreation}>
           <Button type="button">Register new account</Button>
         </form>
       </form>
