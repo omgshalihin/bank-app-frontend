@@ -26,11 +26,11 @@ const Register = ({ email, image }: any) => {
 
   const handleCreation = async () => {
     console.log("hey");
-    submitForm();
+    // submitForm();
 
-    // await Promise.all([submitForm()]).then(() =>
-    //   router.push("/register/success")
-    // );
+    await Promise.all([submitForm()]).then(() =>
+      router.push("/register/success")
+    );
   };
 
   const submitForm = async () => {
@@ -42,7 +42,7 @@ const Register = ({ email, image }: any) => {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then(() => router.push("/register/success"));
+    });
   };
 
   return (
