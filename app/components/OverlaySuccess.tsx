@@ -4,15 +4,19 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
+
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
 
 export default function OverlaySuccess({ id }: any) {
+  const { data, error, isLoading } = useSWR(
+    `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
+    fetcher
+  );
   const [open, setOpen] = useState(true);
 
   const cancelButtonRef = useRef(null);
-
-  const router = useRouter();
-
-  const handleRefresh = () => {};
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -74,7 +78,7 @@ export default function OverlaySuccess({ id }: any) {
                   </div>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <form action={`/dashboard/${id}`}>
+                  <form action={`/dashboard/${data?.id}`}>
                     <button
                       type="submit"
                       className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
