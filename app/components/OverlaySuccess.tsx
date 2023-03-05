@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
-import { Button, Button, Spinner } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
