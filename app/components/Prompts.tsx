@@ -72,6 +72,9 @@ const Prompts = ({ email, image }: any) => {
               <span className="ml-3 flex-1 whitespace-nowrap">
                 Pay & Transfer
               </span>
+              <span className="ml-3 inline-flex items-center justify-center rounded bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                Popular
+              </span>
             </Link>
           </li>
           <li>
@@ -80,9 +83,6 @@ const Prompts = ({ email, image }: any) => {
               className="group flex items-center rounded-lg bg-gray-50 p-3 text-base font-bold text-gray-900 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500"
             >
               <span className="ml-3 flex-1 whitespace-nowrap">Invest</span>
-              <span className="ml-3 inline-flex items-center justify-center rounded bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400">
-                Popular
-              </span>
             </Link>
           </li>
         </ul>

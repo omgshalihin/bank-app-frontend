@@ -95,7 +95,7 @@ export default function OverlaySuccess({ email }: any) {
                     <button
                       disabled={true}
                       type="submit"
-                      className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                      className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
                     >
                       <Spinner aria-label="Spinner button example" />
                       <span className="pl-3">Loading...</span>
