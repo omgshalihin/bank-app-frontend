@@ -46,7 +46,7 @@ const Home = async () => {
         userImage={data.userImage}
         userAccount={data.userAccount}
       /> */}
-      <Prompts email={session?.user?.email} />
+      <Prompts email={session?.user?.email} image={session?.user?.image} />
     </div>
   );
 };

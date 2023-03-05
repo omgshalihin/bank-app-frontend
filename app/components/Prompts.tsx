@@ -4,6 +4,7 @@ import { Card } from "flowbite-react";
 import Link from "next/link";
 import React from "react";
 import useSWR from "swr";
+import Register from "./Register";
 
 interface User {
   id: string;
@@ -16,11 +17,14 @@ interface User {
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 
-const Prompts = ({ email }: any) => {
+const Prompts = ({ email, image }: any) => {
   const { data, error, isLoading } = useSWR(
     `https://bank-app-backend-production.up.railway.app/api/users/account/${email}`,
     fetcher
   );
+
+  // if (!data) return <Register email={email} image={image} />;
+
   return (
     <div className="mx-auto">
       <Card>
