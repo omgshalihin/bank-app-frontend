@@ -82,19 +82,19 @@ export default function OverlaySuccess({ email }: any) {
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   {!data ? (
-                    <Button
+                    <button
                       disabled={true}
+                      type="submit"
                       className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                     >
                       <Spinner aria-label="Spinner button example" />
                       <span className="pl-3">Loading...</span>
-                    </Button>
+                    </button>
                   ) : (
                     <form action={`/dashboard/${data.id}`}>
                       <button
                         type="submit"
                         className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                        // onClick={() => router.push(`/dashboard/${id}`)}
                       >
                         View my dashboard
                       </button>
