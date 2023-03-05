@@ -11,7 +11,7 @@ export default async function NotFound() {
     //   </div>
     // </div>
     <div>
-      <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-24 lg:px-8">
         <div className="relative isolate overflow-hidden px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
           <svg
             viewBox="0 0 1024 1024"
@@ -39,7 +39,8 @@ export default async function NotFound() {
               Start using our app today.
             </h2>
             <p className="mt-6 text-lg leading-8 ">
-              It seems that you are not a member.
+              It seems that you are not a member. Please register an account
+              with us. It's quick and simple!
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
               <Link

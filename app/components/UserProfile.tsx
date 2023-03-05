@@ -99,7 +99,7 @@ const UserProfile = ({ id, image }: User) => {
             Create
           </Link>
         </div>
-        <div className="flow-root max-h-64 overflow-y-scroll">
+        <div className="flow-root max-h-64 overflow-y-scroll no-scrollbar">
           <ul className="divide-y divide-gray-200 dark:divide-gray-700">
             {data.userAccount.map((account: Account) => (
               <li
@@ -186,7 +186,7 @@ const UserProfile = ({ id, image }: User) => {
             Create
           </Link> */}
         </div>
-        <div className="flow-root max-h-64 overflow-y-scroll">
+        <div className="flow-root max-h-64 overflow-y-scroll no-scrollbar">
           <ul className="divide-y divide-gray-200 dark:divide-gray-700">
             <TransactionHistory data={data} />
           </ul>

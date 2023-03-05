@@ -30,9 +30,9 @@ const TransactionHistory = ({ data }: UserData) => {
     <Table>
       <Table.Head>
         <Table.HeadCell>Account name</Table.HeadCell>
-        <Table.HeadCell>Status</Table.HeadCell>
+        <Table.HeadCell>+/-</Table.HeadCell>
         <Table.HeadCell>Price</Table.HeadCell>
-        <Table.HeadCell>Date / Time</Table.HeadCell>
+        <Table.HeadCell>Date/Time</Table.HeadCell>
       </Table.Head>
       <Table.Body className="divide-y">
         {data.userTransactionHistory.map((transaction: Transaction) => (
@@ -40,8 +40,24 @@ const TransactionHistory = ({ data }: UserData) => {
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
               {transaction.accountName}
             </Table.Cell>
-            <Table.Cell>{transaction.transactionStatus}</Table.Cell>
-            <Table.Cell>{transaction.transactionAmount}</Table.Cell>
+            <Table.Cell
+              className={`${
+                transaction.transactionStatus.includes("+")
+                  ? "text-green-400"
+                  : "text-red-400"
+              }`}
+            >
+              {transaction.transactionStatus}
+            </Table.Cell>
+            <Table.Cell
+              className={`${
+                transaction.transactionStatus.includes("+")
+                  ? "text-green-400"
+                  : "text-red-400"
+              }`}
+            >
+              {transaction.transactionAmount}
+            </Table.Cell>
             <Table.Cell>{transaction.historyTimeStamp}</Table.Cell>
           </Table.Row>
         ))}

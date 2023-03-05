@@ -59,13 +59,15 @@ export default function OverlaySuccess({ id }: any) {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Successfully registered as a member
+                        Congratulations!
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          Are you sure you want to deactivate your account? All
-                          of your data will be permanently removed. This action
-                          cannot be undone.
+                          You have just signed up as a member. You are now one
+                          step closer to productively manage your finances. Vist
+                          our dashboard to start monitoring your accounts,
+                          deposits, transfers, payments and transactions
+                          history.
                         </p>
                       </div>
                     </div>
@@ -82,14 +84,15 @@ export default function OverlaySuccess({ id }: any) {
                     </button>
                   </form>
 
-                  <button
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => router.push(`/`)}
-                    ref={cancelButtonRef}
-                  >
-                    View homepage
-                  </button>
+                  <form action={`/`}>
+                    <button
+                      type="submit"
+                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" // onClick={() => router.push(`/dashboard/${id}`)}
+                      ref={cancelButtonRef}
+                    >
+                      View homepage
+                    </button>
+                  </form>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
