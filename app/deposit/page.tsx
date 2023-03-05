@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import React from "react";
 import SignUp from "../components/SignUp";
 
-const Home = async () => {
+const page = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -21,4 +21,4 @@ const Home = async () => {
   );
 };
 
-export default Home;
+export default page;

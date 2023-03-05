@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-export default function NotFound({ email, id }: any) {
+export default function NotFound() {
   return (
     // <div>
     //   <h2>It seems that you are not a member.</h2>
