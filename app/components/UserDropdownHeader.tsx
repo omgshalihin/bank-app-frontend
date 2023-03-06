@@ -41,7 +41,9 @@ const UserDropdownHeader = ({ name, email }: User) => {
           <Dropdown.Item>Pay & Transfer</Dropdown.Item>
         </Link>
         <Dropdown.Item>Invest</Dropdown.Item>
-        <Dropdown.Item>Settings</Dropdown.Item>
+        <Link href={`/userSettings/${data?.id}`}>
+          <Dropdown.Item>Settings</Dropdown.Item>
+        </Link>
         <Dropdown.Divider />
         <Dropdown.Item onClick={() => signOut({ callbackUrl: `/` })}>
           Sign out

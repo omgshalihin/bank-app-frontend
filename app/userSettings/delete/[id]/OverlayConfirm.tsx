@@ -2,21 +2,27 @@
 
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { CheckCircleIcon } from "@heroicons/react/outline";
-import useSWR from "swr";
-import { Spinner } from "flowbite-react";
+import { HandIcon } from "@heroicons/react/outline";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
-
-export default function OverlaySuccess({ email }: any) {
-  const { data, error, isLoading } = useSWR(
-    `https://bank-app-backend-production.up.railway.app/api/users/account/${email}`,
-    fetcher
-  );
+export default function Example({ id }: any) {
+  const router = useRouter();
   const [open, setOpen] = useState(true);
 
   const cancelButtonRef = useRef(null);
+
+  const handleDeleteUser = async () => {
+    const deleteUrl = `https://bank-app-backend-production.up.railway.app/api/users/${id}`;
+
+    await fetch(deleteUrl, {
+      method: "DELETE",
+      mode: "cors",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }).then(() => signOut({ callbackUrl: `/` }));
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -52,9 +58,9 @@ export default function OverlaySuccess({ email }: any) {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                      <CheckCircleIcon
-                        className="h-6 w-6 text-green-600"
+                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                      <HandIcon
+                        className="h-6 w-6 text-red-600"
                         aria-hidden="true"
                       />
                     </div>
@@ -63,52 +69,34 @@ export default function OverlaySuccess({ email }: any) {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Congratulations!
+                        Deactivate account
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          You have just signed up as a member. You are now one
-                          step closer to productively manage your finances.
+                          Are you sure you want to deactivate your account? All
+                          of your data will be permanently removed. This action
+                          cannot be undone.
                         </p>
-                        {!data ? (
-                          <p className="text-sm text-gray-700">
-                            <br />
-                            Note:
-                            <br />
-                            Please wait while we are preparing your dashboard!
-                          </p>
-                        ) : (
-                          <p className="text-sm text-green-500">
-                            <br />
-                            Vist your dashboard to start monitoring your
-                            accounts, deposits, transfers, payments and
-                            transactions history.
-                          </p>
-                        )}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  {!data ? (
-                    <button
-                      disabled={true}
-                      type="submit"
-                      className="inline-flex w-full justify-center rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto"
-                    >
-                      <Spinner aria-label="Spinner button example" />
-                      <span className="pl-3">Loading...</span>
-                    </button>
-                  ) : (
-                    <form action={`/dashboard/${data.id}`}>
-                      <button
-                        type="submit"
-                        className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                      >
-                        View my dashboard
-                      </button>
-                    </form>
-                  )}
+                  <button
+                    type="button"
+                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                    onClick={handleDeleteUser}
+                  >
+                    Deactivate
+                  </button>
+                  <button
+                    type="button"
+                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                    onClick={() => router.push(`/userSettings/${id}`)}
+                    ref={cancelButtonRef}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
