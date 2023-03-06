@@ -100,7 +100,9 @@ const CreateAccount = ({ id }: User) => {
           />
         </div>
         <form onClick={handleCreation}>
-          <Button type="button">Register new account</Button>
+          <Button className="min-w-full" type="button">
+            Register new account
+          </Button>
         </form>
       </form>
     </div>
