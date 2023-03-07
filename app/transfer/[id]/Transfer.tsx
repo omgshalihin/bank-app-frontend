@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Checkbox, Label, Table, TextInput } from "flowbite-react";
+import { Button, Label, Table, TextInput } from "flowbite-react";
 import { BiTransfer } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -54,6 +54,7 @@ const Transfer = ({ id }: any) => {
     const isChecked = true;
 
     setCheckBoxStatus({
+      // status: !checkBoxStatus.status,
       status: isChecked,
       accountName: name,
       accountBalance: balance,

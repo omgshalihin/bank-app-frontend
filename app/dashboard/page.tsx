@@ -20,7 +20,7 @@ const Home = async () => {
 
   return (
     <div>
-      <SignUp />
+      <SignUp email={session?.user?.email} />
     </div>
   );
 };
