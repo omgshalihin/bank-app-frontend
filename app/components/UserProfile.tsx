@@ -99,35 +99,39 @@ const UserProfile = ({ id, image }: User) => {
           </Link>
         </div>
         <div className="flow-root max-h-64 overflow-y-scroll no-scrollbar">
-          <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-            {data.userAccount.map((account: Account) => (
-              <li
-                className={`${
-                  account.accountBalance ||
-                  !account.accountName.includes("From")
-                    ? "py-3 sm:py-4"
-                    : "hidden"
-                }`}
-              >
-                <div className="flex items-center space-x-4">
-                  <div className="shrink-0">
-                    <BsCashCoin className="h-5 w-5" />
+          {!data.userAccount.length ? (
+            <h1>You do not have any accounts with us</h1>
+          ) : (
+            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+              {data.userAccount.map((account: Account) => (
+                <li
+                  className={`${
+                    account.accountBalance ||
+                    !account.accountName.includes("From")
+                      ? "py-3 sm:py-4"
+                      : "hidden"
+                  }`}
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="shrink-0">
+                      <BsCashCoin className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
+                        {account.accountName}
+                      </p>
+                      <p className="truncate text-sm text-gray-500 dark:text-gray-400">
+                        {account.accountId}
+                      </p>
+                    </div>
+                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                      ${account.accountBalance}
+                    </div>
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                      {account.accountName}
-                    </p>
-                    <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                      {account.accountId}
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    ${account.accountBalance}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </Card>
 

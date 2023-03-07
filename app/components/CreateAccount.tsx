@@ -85,6 +85,7 @@ const CreateAccount = ({ id }: User) => {
             type="name"
             required={true}
             shadow={true}
+            placeholder="e.g. personal, transport or food"
           />
         </div>
         <div>
@@ -97,6 +98,7 @@ const CreateAccount = ({ id }: User) => {
             type="amount"
             required={true}
             shadow={true}
+            placeholder="e.g. 9.99, 150"
           />
         </div>
         <form onClick={handleCreation}>

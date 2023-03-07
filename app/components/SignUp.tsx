@@ -28,13 +28,10 @@ export default function NotFound() {
           </svg>
           <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Boost your productivity.
-              <br />
-              Start using our app today.
+              It seems that you are not a member.
             </h2>
             <p className="mt-6 text-lg leading-8 ">
-              It seems that you are not a member. Please register an account
-              with us. It's quick and simple!
+              Please register an account with us. <br /> It's quick and simple!
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
               <Link
@@ -43,9 +40,9 @@ export default function NotFound() {
               >
                 Register an account
               </Link>
-              <Link href="#" className="text-sm font-semibold leading-6">
+              {/* <Link href="#" className="text-sm font-semibold leading-6">
                 Learn more <span aria-hidden="true">→</span>
-              </Link>
+              </Link> */}
             </div>
           </div>
           <div className="relative mt-16 h-80 lg:mt-8"></div>

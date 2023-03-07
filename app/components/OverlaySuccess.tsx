@@ -63,27 +63,24 @@ export default function OverlaySuccess({ email }: any) {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Congratulations!
+                        Congratulations, you are now a member!
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                          You have just signed up as a member. You are now one
-                          step closer to productively manage your finances.
-                        </p>
                         {!data ? (
                           <p className="text-sm text-gray-700">
-                            <br />
-                            Note:
-                            <br />
                             Please wait while we are preparing your dashboard!
                           </p>
                         ) : (
-                          <p className="text-sm text-green-500">
-                            <br />
-                            Vist your dashboard to start monitoring your
-                            accounts, deposits, transfers, payments and
-                            transactions history.
-                          </p>
+                          <div>
+                            <p className="text-sm text-gray-500">
+                              Your dashboard is now ready.
+                            </p>
+                            <p className="text-sm text-green-500 mt-2">
+                              Vist your dashboard to start monitoring your
+                              accounts, deposits, transfers, payments and
+                              transactions history.
+                            </p>
+                          </div>
                         )}
                       </div>
                     </div>

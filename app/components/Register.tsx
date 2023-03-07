@@ -23,7 +23,6 @@ const Register = ({ email, image }: any) => {
   };
 
   const handleCreation = () => {
-    console.log("hey");
     submitForm();
   };
 
@@ -50,7 +49,7 @@ const Register = ({ email, image }: any) => {
       >
         <div>
           <div className="mb-2 block">
-            <Label value="Your username" />
+            <Label value="Create username" />
           </div>
           <TextInput
             type="text"
@@ -59,6 +58,7 @@ const Register = ({ email, image }: any) => {
             value={formData.userName}
             required={true}
             shadow={true}
+            placeholder={`e.g. ${email.split("@")[0]}`}
           />
         </div>
         <div>

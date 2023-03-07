@@ -44,7 +44,7 @@ const Deposit = ({ id }: any) => {
   };
 
   const handleCheckBox = (e: any, name: string, balance: number) => {
-    const isChecked = e.target.checked;
+    const isChecked = true;
 
     setCheckBoxStatus({
       status: isChecked,
@@ -52,6 +52,7 @@ const Deposit = ({ id }: any) => {
       accountBalance: balance,
     });
   };
+  console.log(checkBoxStatus);
 
   const handleConfirm = async (account: Account) => {
     const accountId = account.accountId;
@@ -124,14 +125,12 @@ const Deposit = ({ id }: any) => {
           type="number"
           min={0}
           className="mb-5"
+          placeholder="e.g. 9.99, 100"
         />
       </div>
 
       <Table>
         <Table.Head>
-          <Table.HeadCell className="!p-4">
-            <Checkbox />
-          </Table.HeadCell>
           <Table.HeadCell>Account name</Table.HeadCell>
           <Table.HeadCell>Balance</Table.HeadCell>
           <Table.HeadCell>Projected Balance</Table.HeadCell>
@@ -145,21 +144,25 @@ const Deposit = ({ id }: any) => {
               <Table.Row
                 className={`${
                   !account.accountName.includes("From")
-                    ? "bg-white dark:border-gray-700 dark:bg-gray-800"
+                    ? `border-gray-100 bg-gray-200 dark:border-gray-700 ${
+                        checkBoxStatus.status &&
+                        checkBoxStatus.accountName === account.accountName &&
+                        checkBoxStatus.accountBalance === account.accountBalance
+                          ? "dark:bg-gray-600"
+                          : "dark:bg-gray-800"
+                      } ${
+                        checkBoxStatus.status &&
+                        checkBoxStatus.accountName === account.accountName &&
+                        checkBoxStatus.accountBalance === account.accountBalance
+                          ? "bg-white"
+                          : "bg-gray-200"
+                      } hover:bg-white hover:dark:bg-gray-600`
                     : "hidden"
                 }`}
+                onClick={(e) =>
+                  handleCheckBox(e, account.accountName, account.accountBalance)
+                }
               >
-                <Table.Cell className="!p-4">
-                  <Checkbox
-                    onClick={(e) =>
-                      handleCheckBox(
-                        e,
-                        account.accountName,
-                        account.accountBalance
-                      )
-                    }
-                  />
-                </Table.Cell>
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {account.accountName}
                 </Table.Cell>
