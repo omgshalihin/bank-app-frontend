@@ -31,9 +31,7 @@ const UserDropdownHeader = ({ name, email }: User) => {
     <div>
       <Dropdown label="Navigate">
         <Dropdown.Header>
-          <span className="block text-sm">
-            {data.userName.charAt(0).toUpperCase() + data.userName.slice(1)}
-          </span>
+          <span className="block text-sm">{name}</span>
           <span className="block truncate text-sm font-medium">{email}</span>
         </Dropdown.Header>
         <Link href={`/dashboard/${data?.id}`}>
