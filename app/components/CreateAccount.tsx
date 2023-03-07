@@ -26,8 +26,6 @@ const CreateAccount = ({ id }: User) => {
   };
 
   const handleCreation = () => {
-    console.log("hey");
-
     const newAccountData = {
       accountName: `${name}`,
       accountBalance: amount,
@@ -101,11 +99,9 @@ const CreateAccount = ({ id }: User) => {
             placeholder="e.g. 9.99, 150"
           />
         </div>
-        <form onClick={handleCreation}>
-          <Button className="min-w-full" type="button">
-            Register new account
-          </Button>
-        </form>
+        <Button onClick={handleCreation} className="min-w-full" type="button">
+          Register new account
+        </Button>
       </form>
     </div>
   );

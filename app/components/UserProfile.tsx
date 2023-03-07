@@ -55,7 +55,7 @@ const UserProfile = ({ id, image }: User) => {
             alt="profile image"
           />
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            {data.userName.toUpperCase()}
+            {data.userName.charAt(0).toUpperCase() + data.userName.slice(1)}
           </h5>
 
           <div className="flow-root">
@@ -105,6 +105,7 @@ const UserProfile = ({ id, image }: User) => {
             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
               {data.userAccount.map((account: Account) => (
                 <li
+                  key={account.accountId}
                   className={`${
                     account.accountBalance ||
                     !account.accountName.includes("From")
