@@ -40,12 +40,6 @@ export default function Landing() {
                   Don't have an account? <br />{" "}
                   <div className="text-lg">Sign up here!</div>
                 </button>
-                <button
-                  onClick={() => signIn()}
-                  className="text-sm font-semibold leading-6 "
-                >
-                  Sign in <span aria-hidden="true">→</span>
-                </button>
               </div>
             </div>
           </div>
