@@ -19,7 +19,8 @@ A financial management app that is designed for educational purposes only. It fe
 </div>
 
 ## App Preview
-![bank-app-giphy](https://user-images.githubusercontent.com/52775977/222988594-f42c9eb1-fedd-464b-bc30-91dc6c9a0449.gif)
+![bankgifphy1](https://user-images.githubusercontent.com/52775977/224122218-834a6c98-6ed5-42cc-bc00-7a1521df0bfc.gif)
+
 
 ## To Get Started
 clone this git repository into your local folder
