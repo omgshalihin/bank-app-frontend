@@ -33,12 +33,15 @@ const UserDropdownHeader = ({ name, email }: User) => {
     <div>
       <Dropdown label="Navigate">
         <Dropdown.Header>
-          <span data-safe className="block text-sm">
+          <span data-safe className="block text-sm mb-2">
+            Welcome!
+          </span>
+          {/* <span data-safe className="block text-sm mb-2">
             {name}
-          </span>
-          <span className="block truncate text-sm font-medium mb-2">
+          </span> */}
+          {/* <span className="block truncate text-sm font-medium mb-2">
             {email}
-          </span>
+          </span> */}
           <ThemeToggler />
         </Dropdown.Header>
         <Link href={`/dashboard/${data?.id}`}>
