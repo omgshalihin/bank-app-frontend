@@ -24,7 +24,7 @@ A financial management app that is designed for educational purposes only. It fe
 ## To Get Started
 clone this git repository into your local folder
 ```
-git clone git@github.com:omgshalihin/milk-store-FE.git
+git clone git@github.com:omgshalihin/bank-app-frontend.git
 ```
 go into the folder and open with your favourite IDE
 ```
