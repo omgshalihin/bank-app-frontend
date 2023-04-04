@@ -29,7 +29,7 @@ const UserProfile = ({ id, image }: User) => {
   const [visibleEmail, setVisibleEmail] = useState(false);
   const [visibleId, setVisibleId] = useState(false);
   const { data, error, isLoading } = useSWR(
-    `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/${id}`,
     fetcher
   );
 

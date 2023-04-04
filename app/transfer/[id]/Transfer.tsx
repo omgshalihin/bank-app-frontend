@@ -27,7 +27,7 @@ const fetcher = (url: RequestInfo | URL) =>
 
 const Transfer = ({ id }: any) => {
   const { data, error, isLoading } = useSWR(
-    `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/${id}`,
     fetcher
   );
   const [amount, setAmount] = useState<number>(0);
@@ -127,10 +127,10 @@ const Transfer = ({ id }: any) => {
       transactionAmount: number;
     }
   ) => {
-    const url = `https://bank-app-backend-production.up.railway.app/api/users/${id}?account=${accountId}`;
-    const url2 = `https://bank-app-backend-production.up.railway.app/api/users/transfer/${recipient}`;
-    const url3 = `https://bank-app-backend-production.up.railway.app/api/users/history/${id}`;
-    const url4 = `https://bank-app-backend-production.up.railway.app/api/users/transfer/history/${recipient}`;
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${id}?account=${accountId}`;
+    const url2 = `${process.env.NEXT_PUBLIC_BACKEND_URL}/transfer/${recipient}`;
+    const url3 = `${process.env.NEXT_PUBLIC_BACKEND_URL}/history/${id}`;
+    const url4 = `${process.env.NEXT_PUBLIC_BACKEND_URL}/transfer/history/${recipient}`;
 
     await Promise.all([
       await fetch(url, {

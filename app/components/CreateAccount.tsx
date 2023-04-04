@@ -46,8 +46,8 @@ const CreateAccount = ({ id }: User) => {
       transactionAmount: number;
     }
   ) => {
-    const urlCreateAccount = `https://bank-app-backend-production.up.railway.app/api/users/${id}`;
-    const urlUpdateHistory = `https://bank-app-backend-production.up.railway.app/api/users/history/${id}`;
+    const urlCreateAccount = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${id}`;
+    const urlUpdateHistory = `${process.env.NEXT_PUBLIC_BACKEND_URL}/history/${id}`;
 
     await Promise.all([
       await fetch(urlCreateAccount, {

@@ -32,7 +32,7 @@ const fetcher = (url: RequestInfo | URL) =>
 
 const Deposit = ({ id }: any) => {
   const { data, error, isLoading } = useSWR(
-    `https://bank-app-backend-production.up.railway.app/api/users/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/${id}`,
     fetcher
   );
 
@@ -95,8 +95,8 @@ const Deposit = ({ id }: any) => {
       transactionAmount: number;
     }
   ) => {
-    const url = `https://bank-app-backend-production.up.railway.app/api/users/${id}?account=${accountId}`;
-    const url2 = `https://bank-app-backend-production.up.railway.app/api/users/history/${id}`;
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${id}?account=${accountId}`;
+    const url2 = `${process.env.NEXT_PUBLIC_BACKEND_URL}/history/${id}`;
 
     await Promise.all([
       await fetch(url, {

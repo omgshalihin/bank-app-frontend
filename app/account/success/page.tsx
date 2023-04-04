@@ -10,7 +10,7 @@ interface User {
 
 async function getData(session: Session): Promise<User> {
   const res = await fetch(
-    `https://bank-app-backend-production.up.railway.app/api/users/account/${session?.user?.email}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/account/${session?.user?.email}`
   );
   if (!res.ok) {
     notFound();

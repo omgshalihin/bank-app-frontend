@@ -10,7 +10,7 @@ const fetcher = (url: RequestInfo | URL) =>
 
 const Prompts = ({ email }: any) => {
   const { data, error, isLoading } = useSWR(
-    `https://bank-app-backend-production.up.railway.app/api/users/account/${email}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/account/${email}`,
     fetcher
   );
   const [hover, setHover] = useState(false);

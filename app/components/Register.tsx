@@ -27,7 +27,7 @@ const Register = ({ email, image }: any) => {
   };
 
   const submitForm = async () => {
-    const url = "https://bank-app-backend-production.up.railway.app/api/users";
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}`;
     await fetch(url, {
       method: "POST",
       mode: "cors",

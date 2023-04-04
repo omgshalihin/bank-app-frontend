@@ -13,7 +13,7 @@ export default function Example({ id }: any) {
   const cancelButtonRef = useRef(null);
 
   const handleDeleteUser = async () => {
-    const deleteUrl = `https://bank-app-backend-production.up.railway.app/api/users/${id}`;
+    const deleteUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${id}`;
 
     await fetch(deleteUrl, {
       method: "DELETE",
